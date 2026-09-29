@@ -224,15 +224,20 @@ const TAG = "#KUROMARUアバターフォトコン";
 // この日時以降に投稿されたもので「引用なし（タグだけ）」は、いいねが付いていても自動で審査外にする。
 // それより前のものは、これまでどおり有効（いいね＝受付の合図として運用していたため）。
 const QUOTE_REQUIRED_FROM = "2026-09-30 00:00";
+// 審査員本人の投稿は審査対象外（参考作品）。主催の告知・拡散ポストもここで外れる
+const JUDGE_ACCOUNTS = ["VRChat_Pucchii", "kuromaru9", "Bismuth833", "Wind1653394"];
 const ENTRIES = (window.ENTRIES || []).map(e => {
   const av = AVATARS.find(a => (e.hashtags||[]).some(t => a.tags.includes(t)));
   const reasons = [];
   if (!e.image_count) reasons.push("画像なし（動画かもしれません）");
   if (!(e.hashtags||[]).includes(TAG)) reasons.push("コンテストのタグなし");
   if (e.liked === false) reasons.push("いいねが付いていない");
-  const autoOut = !e.quotes_announcement && (e.posted_at_jst || "") >= QUOTE_REQUIRED_FROM;
-  if (autoOut) reasons.push(`引用なし（${QUOTE_REQUIRED_FROM.slice(0,10)}以降はタグだけでは応募になりません）`);
-  return {...e, avTag: av ? av.key : null, autoOut,
+  const isJudge = JUDGE_ACCOUNTS.some(h => h.toLowerCase() === (e.author || "").toLowerCase());
+  const noQuoteOut = !e.quotes_announcement && (e.posted_at_jst || "") >= QUOTE_REQUIRED_FROM;
+  const autoOut = isJudge || noQuoteOut;
+  if (isJudge) reasons.push("審査員の投稿（参考作品・審査対象外）");
+  if (noQuoteOut) reasons.push(`引用なし（${QUOTE_REQUIRED_FROM.slice(0,10)}以降はタグだけでは応募になりません）`);
+  return {...e, avTag: av ? av.key : null, autoOut, isJudge,
           isSample: /sample/i.test(e.text || ""), reasons, needsCheck: reasons.length > 0};
 });
 const img = (u, size) => u ? u + "?format=jpg&name=" + size : "";
@@ -333,8 +338,11 @@ function render(){
   $("empty").hidden = view.length > 0;
   const total = ENTRIES.length, shown = view.length;
   const noimg = ENTRIES.filter(x => !x.image_count).length;
-  const auto = ENTRIES.filter(x => x.autoOut && verdicts[x.id] !== "in").length;
-  $("count").textContent = `表示 ${shown}件 / 全${total}件（画像なし${noimg}件${auto ? "・引用なしで審査外" + auto + "件" : ""}）・投稿者${new Set(ENTRIES.map(x=>x.author)).size}人`;
+  const autoQ = ENTRIES.filter(x => x.autoOut && !x.isJudge && verdicts[x.id] !== "in").length;
+  const autoJ = ENTRIES.filter(x => x.isJudge && verdicts[x.id] !== "in").length;
+  $("count").textContent = `表示 ${shown}件 / 全${total}件（画像なし${noimg}件`
+    + (autoQ ? `・引用なしで審査外${autoQ}件` : "") + (autoJ ? `・審査員の作品${autoJ}件` : "")
+    + `）・投稿者${new Set(ENTRIES.map(x=>x.author)).size}人`;
   grid.querySelectorAll(".card").forEach(c => {
     const id = c.dataset.id;
     c.querySelector(".ph").onclick = () => { if (ENTRIES.find(x=>x.id===id).image_count) openModal(view.findIndex(x=>x.id===id)); };
@@ -361,7 +369,7 @@ function card(e){
     e.isSample ? `<span class="badge" style="background:#2f7d32">Sample</span>` : "",
     e.image_count > 1 ? `<span class="badge">${e.image_count}枚</span>` : "",
     e.quotes_announcement ? "" : `<span class="badge">引用なし</span>`,
-    (isOut(e) && verdicts[e.id] !== "out") ? `<span class="badge warn">審査外（引用なし）</span>` : "",
+    (isOut(e) && verdicts[e.id] !== "out") ? `<span class="badge warn">審査外（${e.isJudge ? "審査員" : "引用なし"}）</span>` : "",
     e.needsCheck ? `<span class="badge warn">要確認</span>` : ""
   ].join("");
   const vd = (isHost() && (e.needsCheck || verdicts[e.id])) ? `<div class="vd">
