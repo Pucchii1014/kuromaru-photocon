@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KUROMARUアバターフォトコン 審査室</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f5f0; --card:#fff; --ink:#1e1b18; --muted:#6b645c; --line:#e3ddd2;
+  --rec:#e0483e; --banana:#f2c230; --shizuku:#6fb1e8; --melotron:#9acb5c; --midaris:#d8b568;
+  --shadow:0 1px 2px rgba(30,27,24,.06),0 6px 18px rgba(30,27,24,.06);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14120f; --card:#1f1c18; --ink:#ece7df; --muted:#a79e92; --line:#302b24;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35); color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#14120f; --card:#1f1c18; --ink:#ece7df; --muted:#a79e92; --line:#302b24;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Zen Kaku Gothic New',system-ui,sans-serif;font-weight:500;-webkit-font-smoothing:antialiased}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit}
+
+/* ヘッダー */
+header{position:sticky;top:0;z-index:30;background:var(--bg);border-bottom:1px solid var(--line)}
+.hwrap{max-width:1600px;margin:0 auto;padding:14px 16px 10px;display:flex;flex-direction:column;gap:10px}
+.brow{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+h1{font-family:'Yusei Magic',sans-serif;font-weight:400;font-size:26px;margin:0;letter-spacing:.01em}
+h1 .sub{font-family:'Zen Kaku Gothic New';font-weight:500;font-size:13px;color:var(--muted);margin-left:12px}
+.count{margin-left:auto;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.stamp{font-size:12px;font-weight:700;color:var(--rec);border:1px solid var(--rec);border-radius:999px;padding:3px 12px;font-variant-numeric:tabular-nums}
+.ctrls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
+.seg button{border:0;background:transparent;padding:6px 14px;font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.seg button .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.chk{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px}
+.chk input{accent-color:var(--rec)}
+select,.search{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px;font-size:13px}
+.search{min-width:160px}
+.who{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+
+/* グリッド */
+main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;position:relative}
+.card .ph{position:relative;aspect-ratio:16/10;background:#000;overflow:hidden;cursor:zoom-in}
+.card .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.card .ph.noimg{display:flex;align-items:center;justify-content:center;background:var(--line);color:var(--muted);font-size:13px;cursor:default}
+.badges{position:absolute;left:8px;top:8px;display:flex;gap:6px;flex-wrap:wrap}
+.badge{font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:rgba(0,0,0,.62);color:#fff;backdrop-filter:blur(2px)}
+.badge.av{color:#1e1b18}
+.pickmark{position:absolute;right:8px;top:8px;width:30px;height:30px;border-radius:50%;background:var(--rec);color:#fff;display:none;align-items:center;justify-content:center;font-weight:900;font-size:15px;font-variant-numeric:tabular-nums}
+.card.picked{outline:3px solid var(--rec);outline-offset:-3px}
+.card.picked .pickmark{display:flex}
+.meta{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px}
+.meta .txt{font-size:13px;line-height:1.5;max-height:3em;overflow:hidden}
+.meta .row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.meta .row .au{font-weight:700;color:var(--ink)}
+.acts{display:flex;gap:8px;margin-top:2px}
+.acts button,.acts a{flex:1;text-align:center;border:1px solid var(--line);background:transparent;border-radius:8px;padding:6px 8px;font-size:12px;font-weight:700;text-decoration:none;color:var(--muted)}
+.acts .pick{border-color:var(--rec);color:var(--rec)}
+.card.picked .acts .pick{background:var(--rec);color:#fff}
+.card.excluded{opacity:.45}
+.card.excluded .ph{filter:grayscale(1)}
+.vd{display:flex;gap:6px;margin-top:2px}
+.vd button{flex:1;border:1px solid var(--line);background:transparent;border-radius:8px;padding:5px 6px;font-size:12px;font-weight:700;color:var(--muted)}
+.vd button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.badge.warn{background:#b06a10}
+.avset{display:flex;gap:4px;align-items:center;margin-top:4px}
+.avset span{font-size:11px;color:var(--muted);white-space:nowrap}
+.avset button{flex:1;border:1px solid var(--line);background:transparent;border-radius:8px;padding:4px 2px;font-size:11px;font-weight:700;color:var(--muted)}
+.avset button[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:#1e1b18}
+
+/* 詳細 */
+.modal{position:fixed;inset:0;z-index:50;background:rgba(10,8,6,.86);display:none;align-items:center;justify-content:center;padding:16px}
+.modal[data-open="1"]{display:flex}
+.mbox{background:var(--card);border-radius:16px;max-width:1200px;width:100%;max-height:92vh;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,.9fr);overflow:hidden}
+.mimg{background:#000;display:flex;align-items:center;justify-content:center;position:relative;min-height:320px}
+.mimg img{max-width:100%;max-height:92vh;object-fit:contain;display:block}
+.nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);color:#fff;border:0;width:40px;height:56px;font-size:20px}
+.nav.prev{left:0;border-radius:0 8px 8px 0}.nav.next{right:0;border-radius:8px 0 0 8px}
+.mside{padding:18px;display:flex;flex-direction:column;gap:12px;overflow:auto}
+.mside h2{font-family:'Yusei Magic',sans-serif;font-weight:400;font-size:18px;margin:0}
+.mside .txt{font-size:14px;line-height:1.7;white-space:pre-wrap;word-break:break-word}
+.mside dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13px;margin:0}
+.mside dt{color:var(--muted)}
+.mside dd{margin:0;font-variant-numeric:tabular-nums;word-break:break-all}
+.memo{width:100%;min-height:76px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--bg);resize:vertical}
+.big{border:0;border-radius:10px;padding:10px;font-weight:900;font-size:14px;background:var(--rec);color:#fff}
+.big.off{background:transparent;color:var(--rec);border:2px solid var(--rec)}
+.linkx{font-size:13px;color:var(--muted)}
+.thumbs{display:flex;gap:6px;flex-wrap:wrap}
+.thumbs img{width:56px;height:56px;object-fit:cover;border-radius:6px;border:2px solid transparent;cursor:pointer}
+.thumbs img[aria-current="true"]{border-color:var(--rec)}
+.hint{font-size:12px;color:var(--muted)}
+
+/* 下のバー */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--card);border-top:1px solid var(--line);box-shadow:0 -6px 18px rgba(0,0,0,.08)}
+.bwrap{max-width:1600px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.slots{display:flex;gap:6px}
+.slot{width:44px;height:44px;border-radius:8px;border:1px dashed var(--line);background:var(--bg);overflow:hidden;position:relative}
+.slot img{width:100%;height:100%;object-fit:cover}
+.slot .n{position:absolute;left:2px;top:1px;font-size:10px;font-weight:900;color:#fff;text-shadow:0 0 3px #000}
+.bar .st{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar .out{margin-left:auto;display:flex;gap:8px}
+.bar .out button{border:1px solid var(--line);background:transparent;border-radius:999px;padding:8px 16px;font-size:13px;font-weight:700}
+.bar .out button.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.export{display:none;max-width:1600px;margin:0 auto;padding:0 16px 12px}
+.export[data-open="1"]{display:block}
+.export textarea{width:100%;min-height:140px;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--bg);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+@media (max-width:900px){.mbox{grid-template-columns:1fr;max-height:94vh}.mimg{max-height:46vh}.mimg img{max-height:46vh}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hwrap">
+    <div class="brow">
+      <h1>審査室<span class="sub">KUROMARUアバターフォトコンテスト</span></h1>
+      <div class="stamp" id="stamp"></div>
+      <div class="count" id="count">—</div>
+    </div>
+    <div class="ctrls">
+      <div class="seg" id="avseg"></div>
+      <label class="chk"><input type="checkbox" id="fSample"> Sampleのみ</label>
+      <label class="chk"><input type="checkbox" id="fLiked"> いいね済みのみ</label>
+      <label class="chk"><input type="checkbox" id="fNoimg"> 画像なしも表示</label>
+      <label class="chk"><input type="checkbox" id="fPicked"> 選んだものだけ</label>
+      <label class="chk"><input type="checkbox" id="fCheck"> 要確認だけ</label>
+      <label class="chk" id="wrapOut" hidden><input type="checkbox" id="fOut"> 除外したものも表示</label>
+      <select id="sort">
+        <option value="new">新しい順</option>
+        <option value="old">古い順</option>
+        <option value="author">投稿者順</option>
+      </select>
+      <input class="search" id="q" type="search" placeholder="本文・投稿者で検索">
+      <div class="who">審査員 <select id="judge"></select></div>
+    </div>
+    <p class="hint" id="warnStore" hidden style="margin:0;color:#b06a10">このブラウザでは選んだ内容が保存されません。閉じる前に「選んだ作品を書き出す」でコピーしてください。</p>
+  </div>
+</header>
+
+<main>
+  <div class="grid" id="grid"></div>
+  <p class="hint" id="empty" hidden>条件に合う作品がありません。</p>
+</main>
+
+<div class="modal" id="modal" aria-modal="true" role="dialog">
+  <div class="mbox">
+    <div class="mimg">
+      <button class="nav prev" id="mPrev" aria-label="前の作品">‹</button>
+      <img id="mImg" alt="">
+      <button class="nav next" id="mNext" aria-label="次の作品">›</button>
+    </div>
+    <div class="mside">
+      <h2 id="mAuthor"></h2>
+      <div class="thumbs" id="mThumbs"></div>
+      <div class="txt" id="mText"></div>
+      <dl>
+        <dt>投稿</dt><dd id="mTime"></dd>
+        <dt>アバター</dt><dd id="mAv"></dd>
+        <dt>枚数</dt><dd id="mCount"></dd>
+        <dt>受付</dt><dd id="mLiked"></dd>
+      </dl>
+      <a class="linkx" id="mLink" href="#" target="_blank" rel="noopener">元のポストをXで開く ↗</a>
+      <textarea class="memo" id="mMemo" placeholder="メモ（自分だけに見えます）"></textarea>
+      <button class="big" id="mPick">この作品を選ぶ</button>
+      <button class="big off" id="mClose" style="background:transparent;color:var(--muted);border-color:var(--line)">閉じる（Esc）</button>
+      <p class="hint">←→ で前後の作品、S で選ぶ／外す</p>
+    </div>
+  </div>
+</div>
+
+<div class="bar">
+  <div class="bwrap">
+    <div class="slots" id="slots"></div>
+    <div class="st" id="pickState">0 / 5 点</div>
+    <div class="out">
+      <button id="btnVerdict" hidden>判定・アバターを書き出す</button>
+      <button id="btnExport">選んだ作品を書き出す</button>
+      <button id="btnRestore">貼り付けから復元</button>
+      <button id="btnCopy" class="primary">コピー</button>
+    </div>
+  </div>
+  <div class="export" id="exportBox">
+    <textarea id="exportText" placeholder="ここに前の版で書き出したテキストを貼り付けて「貼り付けから復元」を押すと、選んだ5点が戻ります"></textarea>
+  </div>
+</div>
+
+
+<script>
+// データの読み込み：配布ファイル版は window.ENTRIES が埋め込み済み。
+// サイト版（GitHub Pages）は同じ場所の entries.json を毎回読み直す。
+if (window.ENTRIES) { start(); }
+else {
+  fetch("entries.json?" + Date.now())
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(d => { window.ENTRIES = d; start(); })
+    .catch(err => {
+      document.getElementById("grid").innerHTML =
+        `<p class="hint">応募データ（entries.json）を読み込めませんでした：${err.message}<br>ページを開き直しても直らないときは、主催（@VRChat_Pucchii）に知らせてください。</p>`;
+    });
+}
+
+function start(){
+const MAX_PICK = 5;
+const JUDGES = ["ぷっちー","kuromaru9","BIS","Wind-up"];
+// tags：公式タグ＋実際に使われた表記ゆれ
+const AVATARS = [
+  {key:"banana",  tags:["#バナナのばななちゃん"],   name:"ばななちゃん", color:"var(--banana)"},
+  {key:"shizuku", tags:["#びしょぬれのしずくさん"], name:"しずくさん",   color:"var(--shizuku)"},
+  {key:"melotron",tags:["#かんぺきメイドメロトロン"],name:"メロトロン",   color:"var(--melotron)"},
+  {key:"midaris", tags:["#蠱惑のミダリス","#蟲惑のミダリス"], name:"ミダリス", color:"var(--midaris)"}
+];
+const TAG = "#KUROMARUアバターフォトコン";
+const ENTRIES = (window.ENTRIES || []).map(e => {
+  const av = AVATARS.find(a => (e.hashtags||[]).some(t => a.tags.includes(t)));
+  const reasons = [];
+  if (!e.image_count) reasons.push("画像なし（動画かもしれません）");
+  if (!(e.hashtags||[]).includes(TAG)) reasons.push("コンテストのタグなし");
+  if (e.liked === false) reasons.push("いいねが付いていない");
+  return {...e, avTag: av ? av.key : null,
+          isSample: /sample/i.test(e.text || ""), reasons, needsCheck: reasons.length > 0};
+});
+const img = (u, size) => u ? u + "?format=jpg&name=" + size : "";
+
+let judge = load("judge") || JUDGES[0];
+let picks = load("picks:" + judge) || {};      // {id: {order, memo}}
+// 判定：データに書き戻された entry_verdict を土台に、この端末での判定を上書き
+let verdicts = Object.fromEntries(ENTRIES.filter(e => e.entry_verdict).map(e => [e.id, e.entry_verdict]));
+Object.assign(verdicts, load("verdict") || {});  // {id: "in" | "out"}（主催だけが付ける）
+// アバターの手動割り当て：タグがない作品に主催が付ける（データの avatar_manual が土台）
+let avManual = Object.fromEntries(ENTRIES.filter(e => e.avatar_manual).map(e => [e.id, e.avatar_manual]));
+Object.assign(avManual, load("avmanual") || {});
+function avOf(e){
+  const key = e.avTag || avManual[e.id] || null;
+  if (!key) return null;
+  const a = AVATARS.find(x => x.key === key);
+  return a ? {...a, manual: !e.avTag} : null;
+}
+const isHost = () => judge === "ぷっちー";
+let view = [];                                  // 表示中の並び
+let cur = -1;                                   // 詳細で開いている位置
+
+function load(k){ try { return JSON.parse(localStorage.getItem("kmpc:" + k)); } catch(_) { return null; } }
+function save(k,v){ try { localStorage.setItem("kmpc:" + k, JSON.stringify(v)); } catch(_) {} }
+
+/* ---- 審査員 ---- */
+const judgeSel = document.getElementById("judge");
+JUDGES.forEach(j => judgeSel.append(new Option(j, j)));
+judgeSel.value = judge;
+judgeSel.onchange = () => {
+  judge = judgeSel.value; save("judge", judge);
+  picks = load("picks:" + judge) || {};
+  hostUI();
+  render();
+};
+function hostUI(){
+  $("wrapOut").hidden = !isHost();
+  $("btnVerdict").hidden = !isHost();
+  if (!isHost()) $("fOut").checked = false;
+}
+
+/* ---- アバターの絞り込み ---- */
+let avFilter = "all";
+const avseg = document.getElementById("avseg");
+function buildSeg(){
+  const items = [{key:"all",name:"すべて",color:null}, ...AVATARS, {key:"none",name:"タグなし",color:null}];
+  avseg.innerHTML = items.map(i =>
+    `<button data-k="${i.key}" aria-pressed="${i.key===avFilter}">${i.color?`<span class="dot" style="background:${i.color}"></span>`:""}${i.name}</button>`
+  ).join("");
+  avseg.querySelectorAll("button").forEach(b => b.onclick = () => { avFilter = b.dataset.k; buildSeg(); render(); });
+}
+
+/* ---- 絞り込みと並び替え ---- */
+const $ = id => document.getElementById(id);
+["fSample","fLiked","fNoimg","fPicked","fCheck","fOut"].forEach(id => $(id).onchange = render);
+$("sort").onchange = render;
+$("q").oninput = render;
+
+const hasLiked = ENTRIES.some(e => e.liked !== null && e.liked !== undefined);
+if (!hasLiked) { $("fLiked").disabled = true; $("fLiked").closest("label").title = "いいねの情報は次の回収から入ります"; }
+else { $("fLiked").checked = true; }
+
+function filtered(){
+  const q = $("q").value.trim().toLowerCase();
+  let list = ENTRIES.filter(e => {
+    if (verdicts[e.id] === "out" && !$("fOut").checked) return false;
+    if ($("fCheck").checked && !e.needsCheck) return false;
+    if (!$("fNoimg").checked && !e.image_count && !$("fCheck").checked) return false;
+    if ($("fSample").checked && !e.isSample) return false;
+    if ($("fLiked").checked && e.liked !== true) return false;
+    if ($("fPicked").checked && !picks[e.id]) return false;
+    const av = avOf(e);
+    if (avFilter === "none" && av) return false;
+    if (avFilter !== "all" && avFilter !== "none" && (!av || av.key !== avFilter)) return false;
+    if (q && !((e.text||"").toLowerCase().includes(q) || e.author.toLowerCase().includes(q))) return false;
+    return true;
+  });
+  const s = $("sort").value;
+  list.sort((a,b) =>
+    s === "author" ? a.author.localeCompare(b.author) || a.posted_at_jst.localeCompare(b.posted_at_jst)
+    : s === "old"  ? a.posted_at_jst.localeCompare(b.posted_at_jst)
+    :                b.posted_at_jst.localeCompare(a.posted_at_jst));
+  return list;
+}
+
+/* ---- 一覧 ---- */
+function render(){
+  view = filtered();
+  const grid = $("grid");
+  grid.innerHTML = view.map((e,i) => card(e,i)).join("");
+  $("empty").hidden = view.length > 0;
+  const total = ENTRIES.length, shown = view.length;
+  const noimg = ENTRIES.filter(x => !x.image_count).length;
+  $("count").textContent = `表示 ${shown}件 / 全${total}件（画像なし${noimg}件）・投稿者${new Set(ENTRIES.map(x=>x.author)).size}人`;
+  grid.querySelectorAll(".card").forEach(c => {
+    const id = c.dataset.id;
+    c.querySelector(".ph").onclick = () => { if (ENTRIES.find(x=>x.id===id).image_count) openModal(view.findIndex(x=>x.id===id)); };
+    c.querySelector(".pick").onclick = () => togglePick(id);
+    c.querySelector(".detail").onclick = () => openModal(view.findIndex(x=>x.id===id));
+    c.querySelectorAll(".avset button").forEach(b => b.onclick = () => {
+      avManual[id] = avManual[id] === b.dataset.a ? undefined : b.dataset.a;
+      if (!avManual[id]) delete avManual[id];
+      save("avmanual", avManual); render();
+    });
+    c.querySelectorAll(".vd button").forEach(b => b.onclick = () => {
+      verdicts[id] = verdicts[id] === b.dataset.v ? undefined : b.dataset.v;
+      if (!verdicts[id]) delete verdicts[id];
+      save("verdict", verdicts); render();
+    });
+  });
+  renderBar();
+}
+function card(e){
+  const p = picks[e.id];
+  const av = avOf(e);
+  const badges = [
+    av ? `<span class="badge av" style="background:${av.color}">${av.name}${av.manual ? "（手動）" : ""}</span>` : "",
+    e.isSample ? `<span class="badge" style="background:#2f7d32">Sample</span>` : "",
+    e.image_count > 1 ? `<span class="badge">${e.image_count}枚</span>` : "",
+    e.quotes_announcement ? "" : `<span class="badge">引用なし</span>`,
+    e.needsCheck ? `<span class="badge warn">要確認</span>` : ""
+  ].join("");
+  const vd = (isHost() && (e.needsCheck || verdicts[e.id])) ? `<div class="vd">
+      <button data-v="in" aria-pressed="${verdicts[e.id]==="in"}">応募として扱う</button>
+      <button data-v="out" aria-pressed="${verdicts[e.id]==="out"}">応募でない</button>
+    </div>` : "";
+  const why = e.needsCheck ? `<div class="row" style="color:#b06a10">${e.reasons.join("・")}</div>` : "";
+  const avset = (isHost() && !e.avTag && e.image_count) ? `<div class="avset">
+      <span>アバター</span>${AVATARS.map(a =>
+        `<button data-a="${a.key}" aria-pressed="${avManual[e.id]===a.key}" style="--c:${a.color}">${a.name}</button>`).join("")}
+    </div>` : "";
+  const photo = e.image_count
+    ? `<div class="ph"><img loading="lazy" src="${img(e.images[0],"small")}" alt=""><div class="badges">${badges}</div><div class="pickmark">${p?p.order:""}</div></div>`
+    : `<div class="ph noimg">画像なし<div class="badges">${badges}</div></div>`;
+  return `<article class="card ${p?"picked":""} ${verdicts[e.id]==="out"?"excluded":""}" data-id="${e.id}">${photo}
+    <div class="meta">
+      <div class="txt">${escapeHtml(e.text || "")}</div>
+      <div class="row"><span class="au">@${e.author}</span><span>${e.posted_at_jst}</span></div>
+      ${why}
+      <div class="acts">
+        <button class="pick">${p?"選択を外す":"選ぶ"}</button>
+        <button class="detail">大きく見る</button>
+      </div>
+      ${vd}${avset}
+    </div></article>`;
+}
+function escapeHtml(s){ return s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+/* ---- 選ぶ ---- */
+function togglePick(id){
+  if (picks[id]) { delete picks[id]; renumber(); }
+  else {
+    if (Object.keys(picks).length >= MAX_PICK) { alertBar(`選べるのは${MAX_PICK}点までです。外してから選んでください。`); return; }
+    picks[id] = {order: Object.keys(picks).length + 1, memo: ""};
+  }
+  save("picks:" + judge, picks);
+  render();
+  if ($("modal").dataset.open === "1") fillModal();
+}
+function renumber(){
+  Object.entries(picks).sort((a,b) => a[1].order - b[1].order).forEach(([id],i) => picks[id].order = i + 1);
+}
+function alertBar(msg){ const s = $("pickState"); const old = s.textContent; s.textContent = msg; setTimeout(() => renderBar(), 2600); }
+
+function renderBar(){
+  const list = Object.entries(picks).sort((a,b) => a[1].order - b[1].order);
+  $("pickState").textContent = `${list.length} / ${MAX_PICK} 点（${judge}）`;
+  $("slots").innerHTML = Array.from({length: MAX_PICK}, (_,i) => {
+    const hit = list[i];
+    if (!hit) return `<div class="slot"></div>`;
+    const e = ENTRIES.find(x => x.id === hit[0]);
+    return `<div class="slot" title="@${e.author}"><img src="${img(e.images[0],"small")}" alt=""><span class="n">${i+1}</span></div>`;
+  }).join("");
+}
+
+/* ---- 詳細 ---- */
+let curImg = 0;
+function openModal(i){ cur = i; curImg = 0; $("modal").dataset.open = "1"; fillModal(); }
+function closeModal(){ $("modal").dataset.open = "0"; }
+function fillModal(){
+  const e = view[cur]; if (!e) return;
+  const p = picks[e.id];
+  $("mImg").src = img(e.images[curImg] || e.images[0], "large");
+  $("mAuthor").textContent = "@" + e.author;
+  $("mText").textContent = e.text || "（本文なし）";
+  $("mTime").textContent = e.posted_at_jst;
+  const av = avOf(e);
+  $("mAv").textContent = av ? av.name + (av.manual ? "（主催が割り当て）" : "（タグ）") : "タグなし（見て判断）";
+  $("mCount").textContent = e.image_count + "枚" + (e.image_count > 1 ? "（1枚目が作品）" : "");
+  $("mLiked").textContent = e.liked === true ? "いいね済み" : e.liked === false ? "まだ" : "未取得";
+  $("mLink").href = e.url;
+  $("mPick").textContent = p ? `選択を外す（${p.order}番目）` : "この作品を選ぶ";
+  $("mPick").className = p ? "big" : "big off";
+  $("mMemo").value = p ? (p.memo || "") : "";
+  $("mMemo").disabled = !p;
+  $("mMemo").placeholder = p ? "メモ（自分だけに見えます）" : "選ぶとメモを書けます";
+  $("mThumbs").innerHTML = (e.images || []).map((u,i) =>
+    `<img src="${img(u,"small")}" data-i="${i}" aria-current="${i===curImg}" alt="">`).join("");
+  $("mThumbs").querySelectorAll("img").forEach(t => t.onclick = () => { curImg = +t.dataset.i; fillModal(); });
+}
+$("mPrev").onclick = () => { if (cur > 0) { cur--; curImg = 0; fillModal(); } };
+$("mNext").onclick = () => { if (cur < view.length - 1) { cur++; curImg = 0; fillModal(); } };
+$("mClose").onclick = closeModal;
+$("mPick").onclick = () => togglePick(view[cur].id);
+$("mMemo").oninput = () => { const e = view[cur]; if (picks[e.id]) { picks[e.id].memo = $("mMemo").value; save("picks:" + judge, picks); } };
+$("modal").onclick = ev => { if (ev.target.id === "modal") closeModal(); };
+document.addEventListener("keydown", ev => {
+  if ($("modal").dataset.open !== "1") return;
+  if (ev.key === "Escape") closeModal();
+  if (ev.target.tagName === "TEXTAREA") return;
+  if (ev.key === "ArrowLeft") $("mPrev").click();
+  if (ev.key === "ArrowRight") $("mNext").click();
+  if (ev.key.toLowerCase() === "s") togglePick(view[cur].id);
+});
+
+/* ---- 書き出し ---- */
+function exportText(){
+  const list = Object.entries(picks).sort((a,b) => a[1].order - b[1].order);
+  if (!list.length) return `【${judge}の選出】まだ選んでいません`;
+  return `【${judge}の選出 ${list.length}点】\n` + list.map(([id,p],i) => {
+    const e = ENTRIES.find(x => x.id === id);
+    return `${i+1}. @${e.author}　${e.url}${p.memo ? "\n   メモ：" + p.memo : ""}`;
+  }).join("\n");
+}
+$("btnExport").onclick = () => {
+  const box = $("exportBox");
+  box.dataset.open = box.dataset.open === "1" ? "0" : "1";
+  $("exportText").value = exportText();
+};
+$("btnVerdict").onclick = () => {
+  const out = Object.entries(verdicts).filter(([,v]) => v === "out").map(([id]) => ENTRIES.find(x=>x.id===id));
+  const inn = Object.entries(verdicts).filter(([,v]) => v === "in").map(([id]) => ENTRIES.find(x=>x.id===id));
+  const pending = ENTRIES.filter(e => e.needsCheck && !verdicts[e.id]);
+  const f = list => list.length ? list.map(e => `・@${e.author}　${e.url}`).join("\n") : "（なし）";
+  $("exportBox").dataset.open = "1";
+  $("exportText").value =
+    `【応募でない（除外）${out.length}件】\n${f(out)}\n\n【応募として扱う ${inn.length}件】\n${f(inn)}\n\n【まだ判定していない要確認 ${pending.length}件】\n${f(pending)}\n\n【アバターの手動割り当て ${Object.keys(avManual).length}件】\n${
+      Object.keys(avManual).length
+        ? Object.entries(avManual).map(([id,k]) => {
+            const e = ENTRIES.find(x => x.id === id); const a = AVATARS.find(x => x.key === k);
+            return `・${a ? a.name : k}　@${e?e.author:"?"}　${e?e.url:""}`;
+          }).join("\n")
+        : "（なし）"
+    }\n\n--- 貼り付け用（entry_verdict / avatar_manual）---\n${JSON.stringify(verdicts)}\n${JSON.stringify(avManual)}`;
+};
+$("btnRestore").onclick = () => {
+  const box = $("exportBox");
+  if (box.dataset.open !== "1") { box.dataset.open = "1"; $("exportText").value = ""; $("exportText").focus(); alertBar("前の版の書き出しを貼り付けてから、もう一度押してください"); return; }
+  const text = $("exportText").value;
+  const ids = [...text.matchAll(/status\/(\d+)/g)].map(m => m[1]);
+  const memos = {};
+  text.split("\n").forEach((line, i, all) => {
+    const m = line.match(/status\/(\d+)/); if (!m) return;
+    const next = (all[i+1] || "").match(/メモ：(.*)$/); if (next) memos[m[1]] = next[1].trim();
+  });
+  const known = ids.filter(id => ENTRIES.some(e => e.id === id)).slice(0, MAX_PICK);
+  if (!known.length) { alertBar("この版に含まれる作品が見つかりませんでした"); return; }
+  picks = {};
+  known.forEach((id, i) => picks[id] = {order: i + 1, memo: memos[id] || ""});
+  save("picks:" + judge, picks);
+  render();
+  alertBar(`${known.length}点を復元しました${ids.length > known.length ? "（この版にない作品は飛ばしました）" : ""}`);
+};
+$("btnCopy").onclick = async () => {
+  const t = exportText();
+  $("exportBox").dataset.open = "1"; $("exportText").value = t;
+  try { await navigator.clipboard.writeText(t); alertBar("コピーしました"); }
+  catch(_) { $("exportText").select(); alertBar("選択しました（Ctrl+Cでコピー）"); }
+};
+
+const newest = ENTRIES.map(e => e.posted_at_jst).sort().pop() || "—";
+$("stamp").textContent = window.BUILD
+  ? `この版のデータ：${window.BUILD.date} 時点`
+  : `いちばん新しい応募：${newest}`;
+
+const storageOK = (() => { try { localStorage.setItem("kmpc:t","1"); localStorage.removeItem("kmpc:t"); return true; } catch(_) { return false; } })();
+if (!storageOK) $("warnStore").hidden = false;
+
+buildSeg();
+hostUI();
+render();
+} // start()
+</script>
+</body>
+</html>
