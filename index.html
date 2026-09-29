@@ -246,7 +246,8 @@ function avOf(e){
   const a = AVATARS.find(x => x.key === key);
   return a ? {...a, manual: !e.avTag} : null;
 }
-const isHost = () => judge === "ぷっちー";
+// 判定・アバター割り当ては主催だけ。URLの末尾に #host が付いているときだけ出す
+const isHost = () => judge === "ぷっちー" && location.hash === "#host";
 let view = [];                                  // 表示中の並び
 let cur = -1;                                   // 詳細で開いている位置
 
