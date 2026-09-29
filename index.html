@@ -221,13 +221,18 @@ const AVATARS = [
   {key:"midaris", tags:["#蠱惑のミダリス","#蟲惑のミダリス"], name:"ミダリス", color:"var(--midaris)"}
 ];
 const TAG = "#KUROMARUアバターフォトコン";
+// この日時以降に投稿されたもので「引用なし（タグだけ）」は、いいねが付いていても自動で審査外にする。
+// それより前のものは、これまでどおり有効（いいね＝受付の合図として運用していたため）。
+const QUOTE_REQUIRED_FROM = "2026-09-30 00:00";
 const ENTRIES = (window.ENTRIES || []).map(e => {
   const av = AVATARS.find(a => (e.hashtags||[]).some(t => a.tags.includes(t)));
   const reasons = [];
   if (!e.image_count) reasons.push("画像なし（動画かもしれません）");
   if (!(e.hashtags||[]).includes(TAG)) reasons.push("コンテストのタグなし");
   if (e.liked === false) reasons.push("いいねが付いていない");
-  return {...e, avTag: av ? av.key : null,
+  const autoOut = !e.quotes_announcement && (e.posted_at_jst || "") >= QUOTE_REQUIRED_FROM;
+  if (autoOut) reasons.push(`引用なし（${QUOTE_REQUIRED_FROM.slice(0,10)}以降はタグだけでは応募になりません）`);
+  return {...e, avTag: av ? av.key : null, autoOut,
           isSample: /sample/i.test(e.text || ""), reasons, needsCheck: reasons.length > 0};
 });
 const img = (u, size) => u ? u + "?format=jpg&name=" + size : "";
@@ -240,6 +245,12 @@ Object.assign(verdicts, load("verdict") || {});  // {id: "in" | "out"}（主催�
 // アバターの手動割り当て：タグがない作品に主催が付ける（データの avatar_manual が土台）
 let avManual = Object.fromEntries(ENTRIES.filter(e => e.avatar_manual).map(e => [e.id, e.avatar_manual]));
 Object.assign(avManual, load("avmanual") || {});
+// 審査対象から外れるか：主催の判定が最優先。判定がなければ「引用なしの自動除外」を見る
+function isOut(e){
+  if (verdicts[e.id] === "out") return true;
+  if (verdicts[e.id] === "in") return false;
+  return !!e.autoOut;
+}
 function avOf(e){
   const key = e.avTag || avManual[e.id] || null;
   if (!key) return null;
@@ -294,7 +305,7 @@ else { $("fLiked").checked = true; }
 function filtered(){
   const q = $("q").value.trim().toLowerCase();
   let list = ENTRIES.filter(e => {
-    if (verdicts[e.id] === "out" && !$("fOut").checked) return false;
+    if (isOut(e) && !$("fOut").checked) return false;
     if ($("fCheck").checked && !e.needsCheck) return false;
     if (!$("fNoimg").checked && !e.image_count && !$("fCheck").checked) return false;
     if ($("fSample").checked && !e.isSample) return false;
@@ -322,7 +333,8 @@ function render(){
   $("empty").hidden = view.length > 0;
   const total = ENTRIES.length, shown = view.length;
   const noimg = ENTRIES.filter(x => !x.image_count).length;
-  $("count").textContent = `表示 ${shown}件 / 全${total}件（画像なし${noimg}件）・投稿者${new Set(ENTRIES.map(x=>x.author)).size}人`;
+  const auto = ENTRIES.filter(x => x.autoOut && verdicts[x.id] !== "in").length;
+  $("count").textContent = `表示 ${shown}件 / 全${total}件（画像なし${noimg}件${auto ? "・引用なしで審査外" + auto + "件" : ""}）・投稿者${new Set(ENTRIES.map(x=>x.author)).size}人`;
   grid.querySelectorAll(".card").forEach(c => {
     const id = c.dataset.id;
     c.querySelector(".ph").onclick = () => { if (ENTRIES.find(x=>x.id===id).image_count) openModal(view.findIndex(x=>x.id===id)); };
@@ -349,6 +361,7 @@ function card(e){
     e.isSample ? `<span class="badge" style="background:#2f7d32">Sample</span>` : "",
     e.image_count > 1 ? `<span class="badge">${e.image_count}枚</span>` : "",
     e.quotes_announcement ? "" : `<span class="badge">引用なし</span>`,
+    (isOut(e) && verdicts[e.id] !== "out") ? `<span class="badge warn">審査外（引用なし）</span>` : "",
     e.needsCheck ? `<span class="badge warn">要確認</span>` : ""
   ].join("");
   const vd = (isHost() && (e.needsCheck || verdicts[e.id])) ? `<div class="vd">
@@ -363,7 +376,7 @@ function card(e){
   const photo = e.image_count
     ? `<div class="ph"><img loading="lazy" src="${img(e.images[0],"small")}" alt=""><div class="badges">${badges}</div><div class="pickmark">${p?p.order:""}</div></div>`
     : `<div class="ph noimg">画像なし<div class="badges">${badges}</div></div>`;
-  return `<article class="card ${p?"picked":""} ${verdicts[e.id]==="out"?"excluded":""}" data-id="${e.id}">${photo}
+  return `<article class="card ${p?"picked":""} ${isOut(e)?"excluded":""}" data-id="${e.id}">${photo}
     <div class="meta">
       <div class="txt">${escapeHtml(e.text || "")}</div>
       <div class="row"><span class="au">@${e.author}</span><span>${e.posted_at_jst}</span></div>
