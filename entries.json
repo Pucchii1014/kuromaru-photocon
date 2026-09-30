@@ -11,7 +11,11 @@
   "quotes_announcement": true,
   "liked": true,
   "sns_note": "応募ではない（感想コメント）",
-  "entry_verdict": "out"
+  "entry_verdict": "out",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2101128508307353882",
@@ -29,7 +33,11 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2101129977542635850",
@@ -43,7 +51,11 @@
   "quotes_announcement": true,
   "liked": true,
   "sns_note": "応募ではない（審査員立候補）",
-  "entry_verdict": "out"
+  "entry_verdict": "out",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2101178791842492850",
@@ -57,7 +69,11 @@
   "quotes_announcement": true,
   "liked": true,
   "sns_note": "応募ではない（KUROMARU9さんによる告知の拡散）",
-  "entry_verdict": "out"
+  "entry_verdict": "out",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2101179374842318956",
@@ -74,7 +90,11 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2101184131539284428",
@@ -91,7 +111,11 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2101190885946060846",
@@ -109,7 +133,11 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2101278274437701897",
@@ -126,7 +154,11 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2101326398371803532",
@@ -143,7 +175,11 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2101334557438149000",
@@ -160,7 +196,11 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2101527694844555265",
@@ -177,7 +217,11 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2101527987095212431",
@@ -194,7 +238,11 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2101528250505957543",
@@ -212,7 +260,11 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2101532711655719196",
@@ -229,7 +281,11 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2101579860015804921",
@@ -246,7 +302,11 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2101593723117392297",
@@ -263,7 +323,11 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2101605584261026018",
@@ -280,7 +344,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101607990243848635",
@@ -298,7 +367,11 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2101612333252444455",
@@ -317,7 +390,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101621504274518167",
@@ -334,7 +412,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101622817947373681",
@@ -351,7 +434,11 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2101623660050272566",
@@ -368,7 +455,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101638331339788553",
@@ -385,7 +477,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101687835141214246",
@@ -402,7 +499,11 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2101717944510378327",
@@ -419,7 +520,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101740163340927053",
@@ -436,7 +542,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101780542865973520",
@@ -453,7 +564,11 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2101785974368051264",
@@ -470,7 +585,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101799406525952284",
@@ -487,7 +607,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101827165461598716",
@@ -504,7 +629,11 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2101831135944990922",
@@ -521,7 +650,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101835776388641268",
@@ -538,7 +672,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101836320272441450",
@@ -555,7 +694,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101844010579177788",
@@ -572,7 +716,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101855330250657898",
@@ -589,7 +738,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101863575476425075",
@@ -607,7 +761,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101867959228768592",
@@ -624,7 +783,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101878935353188856",
@@ -641,7 +805,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101880502424866934",
@@ -658,7 +827,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101893607414501876",
@@ -675,7 +849,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101896596728471729",
@@ -692,7 +871,11 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": false,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2101910723605766177",
@@ -709,7 +892,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101920491544129536",
@@ -726,7 +914,11 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2101964628045795668",
@@ -743,7 +935,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2101987993296998546",
@@ -760,7 +957,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102033397237666213",
@@ -777,7 +979,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102047567563595832",
@@ -794,7 +1001,11 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": false,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2102050226898927972",
@@ -811,7 +1022,11 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2102053242343657924",
@@ -828,7 +1043,11 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": false,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2102067077691703312",
@@ -845,7 +1064,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102072838031282536",
@@ -862,7 +1086,11 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2102078492963987956",
@@ -879,7 +1107,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102093558253785244",
@@ -896,7 +1129,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102098693256253793",
@@ -914,7 +1152,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102107492708942018",
@@ -931,7 +1174,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102167840266842602",
@@ -948,7 +1196,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102190720811778439",
@@ -965,7 +1218,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102199194950009020",
@@ -982,7 +1240,11 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2102199620545999122",
@@ -999,7 +1261,11 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2102199774506365371",
@@ -1017,7 +1283,11 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2102216312709943428",
@@ -1035,7 +1305,11 @@
   ],
   "quotes_announcement": false,
   "liked": true,
-  "image_fixed_by": "claude 2026-09-29（回収時の取りこぼしを補完）"
+  "image_fixed_by": "claude 2026-09-29（回収時の取りこぼしを補完）",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2102223586048249910",
@@ -1053,7 +1327,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "image_fixed_by": "claude 2026-09-29（回収時の取りこぼしを補完）"
+  "image_fixed_by": "claude 2026-09-29（回収時の取りこぼしを補完）",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102226477370708154",
@@ -1070,7 +1349,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102238110826541562",
@@ -1087,7 +1371,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102249885210988975",
@@ -1104,7 +1393,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102261506834653237",
@@ -1121,7 +1415,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102267380990910466",
@@ -1138,7 +1437,11 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2102274271385129434",
@@ -1155,7 +1458,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102277384515068177",
@@ -1172,7 +1480,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102286717420269981",
@@ -1189,7 +1502,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102296374381547743",
@@ -1206,7 +1524,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102358936812998761",
@@ -1223,7 +1546,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102359389802057868",
@@ -1240,7 +1568,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102386549711413301",
@@ -1258,7 +1591,11 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2102405352377782727",
@@ -1275,7 +1612,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102412607290474749",
@@ -1292,7 +1634,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102430287712141768",
@@ -1312,7 +1659,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102537533787951480",
@@ -1332,7 +1684,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102562797976776962",
@@ -1349,7 +1706,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102566492328128554",
@@ -1366,7 +1728,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102585364229841225",
@@ -1382,7 +1749,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102599259782881543",
@@ -1398,7 +1770,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102614684796850495",
@@ -1414,7 +1791,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102617067241497027",
@@ -1431,7 +1813,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102628162031305033",
@@ -1448,7 +1835,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102628683530002540",
@@ -1465,7 +1857,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102643142193467651",
@@ -1482,7 +1879,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102664915417026910",
@@ -1499,7 +1901,11 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2102666890967663000",
@@ -1516,7 +1922,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102678366931583137",
@@ -1533,7 +1944,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102706852178034760",
@@ -1550,7 +1966,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102712377909358695",
@@ -1567,7 +1988,12 @@
    "#バナナのばななちゃん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102736841363575161",
@@ -1584,7 +2010,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "midaris"
+  "avatar_manual": "midaris",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102766880373264495",
@@ -1601,7 +2032,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102774993247490279",
@@ -1618,7 +2054,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102794439802630436",
@@ -1637,7 +2078,12 @@
    "#VRChat_world紹介"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102795848358985928",
@@ -1655,7 +2101,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102831344573436202",
@@ -1672,7 +2123,11 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2102917095587713271",
@@ -1689,7 +2144,11 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": false,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2102952438080901237",
@@ -1706,7 +2165,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102953442750919100",
@@ -1723,7 +2187,11 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2102968896382963901",
@@ -1740,7 +2208,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102970562419314853",
@@ -1757,7 +2230,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102972855319462079",
@@ -1774,7 +2252,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102975759598166186",
@@ -1792,7 +2275,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102980900657254457",
@@ -1809,7 +2297,11 @@
   ],
   "quotes_announcement": false,
   "liked": true,
-  "avatar_manual": "midaris"
+  "avatar_manual": "midaris",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2102983609783287814",
@@ -1826,7 +2318,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102993464426451085",
@@ -1843,7 +2340,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2102995219432284207",
@@ -1860,7 +2362,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103005883999596640",
@@ -1877,7 +2384,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103008613866545428",
@@ -1894,7 +2406,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103015040660197559",
@@ -1911,7 +2428,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103017063426187311",
@@ -1928,7 +2450,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103026386864939506",
@@ -1945,7 +2472,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103098781332050254",
@@ -1963,7 +2495,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103101284677210313",
@@ -1980,7 +2517,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103101626018144427",
@@ -1997,7 +2539,11 @@
   ],
   "quotes_announcement": false,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2103102232556409164",
@@ -2015,7 +2561,11 @@
   ],
   "quotes_announcement": false,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2103102556625137720",
@@ -2032,7 +2582,11 @@
   ],
   "quotes_announcement": false,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2103102807129882761",
@@ -2049,7 +2603,11 @@
   ],
   "quotes_announcement": false,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2103102954165379366",
@@ -2068,7 +2626,11 @@
   "quotes_announcement": false,
   "liked": true,
   "image_fixed_by": "claude 2026-09-29（回収時の取りこぼしを補完）",
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2103111718352380407",
@@ -2083,7 +2645,11 @@
   "liked": true,
   "sns_note": "写真なし。本人の作品ポスト 2103102954165379366 へのリンクだけの引用（作品は別IDで収集済み・重複）",
   "entry_verdict": "out",
-  "verdict_note": "写真本体（https://x.com/i04j05t06/status/2103102954165379366）を応募として扱うため、この投稿は重複"
+  "verdict_note": "写真本体（https://x.com/i04j05t06/status/2103102954165379366）を応募として扱うため、この投稿は重複",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2103113808701231352",
@@ -2100,7 +2666,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103114192073220309",
@@ -2117,7 +2688,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103113975454130544",
@@ -2134,7 +2710,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103134425727037664",
@@ -2151,7 +2732,11 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": false,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2103137383852155344",
@@ -2168,7 +2753,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103147787294847424",
@@ -2185,7 +2775,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103173624035483857",
@@ -2202,7 +2797,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103229197800059286",
@@ -2219,7 +2819,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103229556375306390",
@@ -2236,7 +2841,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103245632144388457",
@@ -2253,7 +2863,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103314600905376201",
@@ -2270,7 +2885,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103325387153723894",
@@ -2287,7 +2907,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103341710524969436",
@@ -2304,7 +2929,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103354529333010749",
@@ -2321,7 +2951,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103369815457145303",
@@ -2338,7 +2973,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103378368679014740",
@@ -2355,7 +2995,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103414508102508801",
@@ -2372,7 +3017,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103499769242955952",
@@ -2389,7 +3039,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103505323575398690",
@@ -2407,7 +3062,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "midaris"
+  "avatar_manual": "midaris",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103553549984751969",
@@ -2424,7 +3084,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103558261169602918",
@@ -2444,7 +3109,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "midaris"
+  "avatar_manual": "midaris",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103597952124297381",
@@ -2461,7 +3131,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103611083546313143",
@@ -2478,7 +3153,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "midaris"
+  "avatar_manual": "midaris",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103650050903802124",
@@ -2495,7 +3175,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103659243404743100",
@@ -2512,7 +3197,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103661473042162127",
@@ -2529,7 +3219,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103667875320050113",
@@ -2546,7 +3241,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103672818781257975",
@@ -2563,7 +3263,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103679228185370741",
@@ -2580,7 +3285,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103710814524117305",
@@ -2597,7 +3307,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103710995034300909",
@@ -2614,7 +3329,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103723592076923195",
@@ -2631,7 +3351,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103725875355410937",
@@ -2648,7 +3373,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103732385951125633",
@@ -2665,7 +3395,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103732832808079508",
@@ -2682,7 +3417,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103736209428394362",
@@ -2699,7 +3439,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103753298067210655",
@@ -2716,7 +3461,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103762958459519273",
@@ -2733,7 +3483,12 @@
    "#蟲惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103783687112495210",
@@ -2750,7 +3505,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103801986668003467",
@@ -2767,7 +3527,11 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2103825603007017304",
@@ -2784,7 +3548,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103826080801206645",
@@ -2801,7 +3570,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103834739077730771",
@@ -2818,7 +3592,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103862157536587893",
@@ -2835,7 +3614,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103878714287444081",
@@ -2852,7 +3636,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103895569882333627",
@@ -2869,7 +3658,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103900894073151958",
@@ -2886,7 +3680,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103928741818986906",
@@ -2903,7 +3702,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103990232307929471",
@@ -2920,7 +3724,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2103998050096271853",
@@ -2937,7 +3746,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104011371985936634",
@@ -2954,7 +3768,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104033610923950476",
@@ -2971,7 +3790,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104044135040864649",
@@ -2988,7 +3812,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104063470224445811",
@@ -3005,7 +3834,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104073765550542921",
@@ -3022,7 +3856,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104082371431833931",
@@ -3039,7 +3878,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104085011792293999",
@@ -3056,7 +3900,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104087623870652637",
@@ -3073,7 +3922,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104090058785698302",
@@ -3090,7 +3944,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104102101391708357",
@@ -3107,7 +3966,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104107330363380044",
@@ -3124,7 +3988,11 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2104111437870473408",
@@ -3141,7 +4009,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104121368589865468",
@@ -3159,7 +4032,12 @@
    "#VRChat_world紹介"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104124222692114622",
@@ -3176,7 +4054,11 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2104126344221331585",
@@ -3193,7 +4075,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104130423710527600",
@@ -3210,7 +4097,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104149204193144955",
@@ -3227,7 +4119,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104155500879466680",
@@ -3244,7 +4141,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104160437562659253",
@@ -3261,7 +4163,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104168910916579483",
@@ -3279,7 +4186,11 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": false,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2104200889057816674",
@@ -3297,7 +4208,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104210851779797238",
@@ -3314,7 +4230,11 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": false,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2104211087164137639",
@@ -3331,7 +4251,11 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": false,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2104211657904071043",
@@ -3348,7 +4272,11 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": false,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2104211944471409127",
@@ -3363,7 +4291,11 @@
   "liked": true,
   "sns_note": "写真なし。本人の作品ポスト 2104211657904071043 へのリンクだけの引用（作品は別IDで収集済み・重複）",
   "entry_verdict": "out",
-  "verdict_note": "写真本体（https://x.com/i04j05t06/status/2104211657904071043）を応募として扱うため、この投稿は重複"
+  "verdict_note": "写真本体（https://x.com/i04j05t06/status/2104211657904071043）を応募として扱うため、この投稿は重複",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2104211993138024634",
@@ -3378,7 +4310,11 @@
   "liked": true,
   "sns_note": "写真なし。本人の作品ポスト 2104210851779797238 へのリンクだけの引用（作品は別IDで収集済み・重複）",
   "entry_verdict": "out",
-  "verdict_note": "写真本体（https://x.com/i04j05t06/status/2104210851779797238）を応募として扱うため、この投稿は重複"
+  "verdict_note": "写真本体（https://x.com/i04j05t06/status/2104210851779797238）を応募として扱うため、この投稿は重複",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2104224552788119833",
@@ -3395,7 +4331,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104246031030620185",
@@ -3412,7 +4353,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104330645568909419",
@@ -3429,7 +4375,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104338394491027820",
@@ -3447,7 +4398,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104360519478260192",
@@ -3464,7 +4420,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104371036271833377",
@@ -3481,7 +4442,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104378966459257209",
@@ -3498,7 +4464,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104403751117480271",
@@ -3515,7 +4486,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104436802643992792",
@@ -3532,7 +4508,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104449300277448796",
@@ -3549,7 +4530,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104457536229486663",
@@ -3566,7 +4552,12 @@
   ],
   "quotes_announcement": true,
   "liked": true,
-  "avatar_manual": "shizuku"
+  "avatar_manual": "shizuku",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104489752070365541",
@@ -3583,7 +4574,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104519713246392416",
@@ -3602,7 +4598,12 @@
   "quotes_announcement": true,
   "liked": true,
   "entry_verdict": "in",
-  "liked_fixed_by": "claude 2026-09-30（Chromeで実際のいいね状態を確認）"
+  "liked_fixed_by": "claude 2026-09-30（Chromeで実際のいいね状態を確認）",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104521591317274811",
@@ -3619,7 +4620,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104523113383788839",
@@ -3636,7 +4642,11 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2104524550377718188",
@@ -3653,7 +4663,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104524803290079418",
@@ -3670,7 +4685,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104558381793227250",
@@ -3687,7 +4707,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104561090747371702",
@@ -3704,7 +4729,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104586934530007512",
@@ -3721,7 +4751,12 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104598916633399745",
@@ -3738,7 +4773,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104614672628596820",
@@ -3754,7 +4794,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104637498517487822",
@@ -3771,7 +4816,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104639289246265459",
@@ -3787,9 +4837,13 @@
    "#CYCR",
    "#蠱惑のミダリス"
   ],
-  "quotes_announcement": false,
+  "quotes_announcement": true,
   "liked": true,
-  "entry_verdict": "in"
+  "entry_verdict": "in",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes"
+  ]
  },
  {
   "id": "2104668952710574143",
@@ -3806,7 +4860,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104668806438433061",
@@ -3823,7 +4882,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104669116124811631",
@@ -3840,7 +4904,12 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104693128213221799",
@@ -3857,7 +4926,11 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "search"
+  ]
  },
  {
   "id": "2104710897486954603",
@@ -3874,7 +4947,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104712332639457785",
@@ -3891,7 +4969,12 @@
    "#びしょぬれのしずくさん"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104753315389296914",
@@ -3907,7 +4990,12 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104765929897013629",
@@ -3926,7 +5014,12 @@
   "quotes_announcement": true,
   "liked": true,
   "entry_verdict": "in",
-  "liked_fixed_by": "claude 2026-09-30（Chromeで実際のいいね状態を確認）"
+  "liked_fixed_by": "claude 2026-09-30（Chromeで実際のいいね状態を確認）",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104766088148091036",
@@ -3945,7 +5038,12 @@
   "quotes_announcement": true,
   "liked": true,
   "entry_verdict": "in",
-  "liked_fixed_by": "claude 2026-09-30（Chromeで実際のいいね状態を確認）"
+  "liked_fixed_by": "claude 2026-09-30（Chromeで実際のいいね状態を確認）",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  },
  {
   "id": "2104773545465409742",
@@ -3962,6 +5060,11 @@
   "liked": false,
   "sns_note": "引用リンクとタグのみで写真なし。いいねも無し",
   "entry_verdict": "out",
-  "verdict_note": "写真なし・告知のURLを貼っただけ"
+  "verdict_note": "写真なし・告知のURLを貼っただけ",
+  "found_round": "2026-09-29",
+  "found_via": [
+   "quotes",
+   "search"
+  ]
  }
 ]
