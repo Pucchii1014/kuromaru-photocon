@@ -352,7 +352,8 @@ function filtered(){
     if ($("fCheck").checked && !e.needsCheck) return false;
     if (!$("fNoimg").checked && !e.image_count && !$("fCheck").checked) return false;
     if ($("fSample").checked && !e.isSample) return false;
-    if ($("fLiked").checked && e.liked !== true) return false;
+    // 主催が「応募として扱う」にしたものは、いいねが無くても表示する
+    if ($("fLiked").checked && e.liked !== true && verdicts[e.id] !== "in") return false;
     if ($("fPicked").checked && !picks[e.id]) return false;
     const av = avOf(e);
     if (avFilter === "none" && av) return false;

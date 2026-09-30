@@ -3600,7 +3600,9 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": true,
-  "liked": false
+  "liked": true,
+  "entry_verdict": "in",
+  "liked_fixed_by": "claude 2026-09-30（Chromeで実際のいいね状態を確認）"
  },
  {
   "id": "2104521591317274811",
@@ -3922,7 +3924,9 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": false
+  "liked": true,
+  "entry_verdict": "in",
+  "liked_fixed_by": "claude 2026-09-30（Chromeで実際のいいね状態を確認）"
  },
  {
   "id": "2104766088148091036",
@@ -3939,7 +3943,9 @@
    "#かんぺきメイドメロトロン"
   ],
   "quotes_announcement": true,
-  "liked": false
+  "liked": true,
+  "entry_verdict": "in",
+  "liked_fixed_by": "claude 2026-09-30（Chromeで実際のいいね状態を確認）"
  },
  {
   "id": "2104773545465409742",
