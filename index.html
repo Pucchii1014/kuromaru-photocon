@@ -140,6 +140,7 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
       <label class="chk"><input type="checkbox" id="fLiked"> いいね済みのみ</label>
       <label class="chk"><input type="checkbox" id="fNoimg"> 画像なしも表示</label>
       <label class="chk"><input type="checkbox" id="fPicked"> 選んだものだけ</label>
+      <label class="chk" id="wrapNew" hidden><input type="checkbox" id="fNew"> 新着だけ</label>
       <label class="chk"><input type="checkbox" id="fCheck"> 要確認だけ</label>
       <label class="chk" id="wrapOut" hidden><input type="checkbox" id="fOut"> 除外したものも表示</label>
       <select id="sort">
@@ -337,7 +338,7 @@ function buildSeg(){
 
 /* ---- 絞り込みと並び替え ---- */
 const $ = id => document.getElementById(id);
-["fSample","fLiked","fNoimg","fPicked","fCheck","fOut"].forEach(id => $(id).onchange = render);
+["fSample","fLiked","fNoimg","fPicked","fCheck","fOut","fNew"].forEach(id => $(id).onchange = render);
 $("sort").onchange = render;
 $("q").oninput = render;
 
@@ -350,6 +351,7 @@ function filtered(){
   let list = ENTRIES.filter(e => {
     if (isOut(e) && !$("fOut").checked) return false;
     if ($("fCheck").checked && !e.needsCheck) return false;
+    if ($("fNew").checked && !e.isNew) return false;
     if (!$("fNoimg").checked && !e.image_count && !$("fCheck").checked) return false;
     if ($("fSample").checked && !e.isSample) return false;
     // 主催が「応募として扱う」にしたものは、いいねが無くても表示する
@@ -412,7 +414,8 @@ function card(e){
     e.quotes_announcement ? "" : `<span class="badge">引用なし</span>`,
     (isOut(e) && verdicts[e.id] !== "out") ? `<span class="badge warn">審査外（${e.isJudge ? "審査員" : "引用なし"}）</span>` : "",
     e.needsCheck ? `<span class="badge warn">要確認</span>` : "",
-    aw0 ? `<span class="badge" style="background:#7b4fd8">${aw0.short}</span>` : ""
+    aw0 ? `<span class="badge" style="background:#7b4fd8">${aw0.short}</span>` : "",
+    e.isNew ? `<span class="badge" style="background:#2f7d32">新着</span>` : ""
   ].join("");
   const vd = (isHost() && (e.needsCheck || verdicts[e.id])) ? `<div class="vd">
       <button data-v="in" aria-pressed="${verdicts[e.id]==="in"}">応募として扱う</button>
@@ -587,6 +590,15 @@ const newest = ENTRIES.map(e => e.posted_at_jst).sort().pop() || "—";
 $("stamp").textContent = window.BUILD
   ? `この版のデータ：${window.BUILD.date} 時点`
   : `いちばん新しい応募：${newest}`;
+
+// 新着：いちばん新しい回収日に初めて拾われたもの（回収が2回以上あるときだけ使う）
+const ROUNDS = [...new Set(ENTRIES.map(e => e.found_round).filter(Boolean))].sort();
+const LATEST_ROUND = ROUNDS.length > 1 ? ROUNDS[ROUNDS.length - 1] : null;
+ENTRIES.forEach(e => e.isNew = !!LATEST_ROUND && e.found_round === LATEST_ROUND);
+if (LATEST_ROUND) {
+  $("wrapNew").hidden = false;
+  $("wrapNew").title = `${LATEST_ROUND} の回収で新しく入ったもの`;
+}
 
 const storageOK = (() => { try { localStorage.setItem("kmpc:t","1"); localStorage.removeItem("kmpc:t"); return true; } catch(_) { return false; } })();
 if (!storageOK) $("warnStore").hidden = false;
