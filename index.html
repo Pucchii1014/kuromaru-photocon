@@ -79,6 +79,10 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
 .avset span{font-size:11px;color:var(--muted);white-space:nowrap}
 .avset button{flex:1;border:1px solid var(--line);background:transparent;border-radius:8px;padding:4px 2px;font-size:11px;font-weight:700;color:var(--muted)}
 .avset button[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:#1e1b18}
+.awrow{display:flex;gap:4px;align-items:center;margin-top:4px}
+.awrow span{font-size:11px;color:var(--muted);white-space:nowrap}
+.awrow button{flex:1;border:1px solid #7b4fd8;background:transparent;border-radius:8px;padding:4px 2px;font-size:11px;font-weight:700;color:#7b4fd8}
+.awrow button[aria-pressed="true"]{background:#7b4fd8;color:#fff}
 
 /* 詳細 */
 .modal{position:fixed;inset:0;z-index:50;background:rgba(10,8,6,.86);display:none;align-items:center;justify-content:center;padding:16px}
@@ -110,6 +114,8 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
 .slot{width:44px;height:44px;border-radius:8px;border:1px dashed var(--line);background:var(--bg);overflow:hidden;position:relative}
 .slot img{width:100%;height:100%;object-fit:cover}
 .slot .n{position:absolute;left:2px;top:1px;font-size:10px;font-weight:900;color:#fff;text-shadow:0 0 3px #000}
+.slots .sep{width:10px}
+.slot:has(.n:not(:empty)){border-color:var(--line)}
 .bar .st{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
 .bar .out{margin-left:auto;display:flex;gap:8px}
 .bar .out button{border:1px solid var(--line);background:transparent;border-radius:999px;padding:8px 16px;font-size:13px;font-weight:700}
@@ -172,6 +178,7 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
       </dl>
       <a class="linkx" id="mLink" href="#" target="_blank" rel="noopener">元のポストをXで開く ↗</a>
       <textarea class="memo" id="mMemo" placeholder="メモ（自分だけに見えます）"></textarea>
+      <div class="awrow" id="mAwards"></div>
       <button class="big" id="mPick">この作品を選ぶ</button>
       <button class="big off" id="mClose" style="background:transparent;color:var(--muted);border-color:var(--line)">閉じる（Esc）</button>
       <p class="hint">←→ で前後の作品、S で選ぶ／外す</p>
@@ -213,6 +220,18 @@ else {
 function start(){
 const MAX_PICK = 5;
 const JUDGES = ["ぷっちー","kuromaru9","BIS","Wind-up"];
+// 担当の賞（総合部門の5点とは別枠。1つの賞につき1点）
+const AWARDS = {
+  "ぷっちー":  [{key:"judge_p", label:"審査員賞（ぷっちー）", short:"審査員賞"}],
+  "BIS":       [{key:"judge_b", label:"審査員賞（BIS）",      short:"審査員賞"}],
+  "Wind-up":   [{key:"sample",  label:"Sampleアバター賞",     short:"Sample賞", sampleOnly:true}],
+  "kuromaru9": [
+    {key:"av_banana",  label:"アバター別賞（ばななちゃん）", short:"ばなな賞", av:"banana"},
+    {key:"av_shizuku", label:"アバター別賞（しずくさん）",   short:"しずく賞", av:"shizuku"},
+    {key:"av_melotron",label:"アバター別賞（メロトロン）",   short:"メロ賞",   av:"melotron"},
+    {key:"av_midaris", label:"アバター別賞（ミダリス）",     short:"ミダ賞",   av:"midaris"}
+  ]
+};
 // tags：公式タグ＋実際に使われた表記ゆれ
 const AVATARS = [
   {key:"banana",  tags:["#バナナのばななちゃん"],   name:"ばななちゃん", color:"var(--banana)"},
@@ -244,6 +263,24 @@ const img = (u, size) => u ? u + "?format=jpg&name=" + size : "";
 
 let judge = load("judge") || JUDGES[0];
 let picks = load("picks:" + judge) || {};      // {id: {order, memo}}
+let awards = load("awards:" + judge) || {};    // {賞のkey: 作品のid}
+const myAwards = () => AWARDS[judge] || [];
+// この作品に出す「担当の賞」のボタン：アバター別賞は、その子の作品にだけ出す
+function awardsFor(e){
+  return myAwards().filter(a => {
+    if (a.av) { const av = avOf(e); return av ? av.key === a.av : true; }
+    if (a.sampleOnly) return e.isSample;
+    return true;
+  });
+}
+function awardOf(e){ return myAwards().find(a => awards[a.key] === e.id) || null; }
+function toggleAward(key, id){
+  awards[key] = awards[key] === id ? undefined : id;
+  if (!awards[key]) delete awards[key];
+  save("awards:" + judge, awards);
+  render();
+  if ($("modal").dataset.open === "1") fillModal();
+}
 // 判定：データに書き戻された entry_verdict を土台に、この端末での判定を上書き
 let verdicts = Object.fromEntries(ENTRIES.filter(e => e.entry_verdict).map(e => [e.id, e.entry_verdict]));
 Object.assign(verdicts, load("verdict") || {});  // {id: "in" | "out"}（主催だけが付ける）
@@ -277,6 +314,7 @@ judgeSel.value = judge;
 judgeSel.onchange = () => {
   judge = judgeSel.value; save("judge", judge);
   picks = load("picks:" + judge) || {};
+  awards = load("awards:" + judge) || {};
   hostUI();
   render();
 };
@@ -348,6 +386,7 @@ function render(){
     c.querySelector(".ph").onclick = () => { if (ENTRIES.find(x=>x.id===id).image_count) openModal(view.findIndex(x=>x.id===id)); };
     c.querySelector(".pick").onclick = () => togglePick(id);
     c.querySelector(".detail").onclick = () => openModal(view.findIndex(x=>x.id===id));
+    c.querySelectorAll(".awrow button").forEach(b => b.onclick = () => toggleAward(b.dataset.aw, id));
     c.querySelectorAll(".avset button").forEach(b => b.onclick = () => {
       avManual[id] = avManual[id] === b.dataset.a ? undefined : b.dataset.a;
       if (!avManual[id]) delete avManual[id];
@@ -364,19 +403,24 @@ function render(){
 function card(e){
   const p = picks[e.id];
   const av = avOf(e);
+  const aw0 = awardOf(e);
   const badges = [
     av ? `<span class="badge av" style="background:${av.color}">${av.name}${av.manual ? "（手動）" : ""}</span>` : "",
     e.isSample ? `<span class="badge" style="background:#2f7d32">Sample</span>` : "",
     e.image_count > 1 ? `<span class="badge">${e.image_count}枚</span>` : "",
     e.quotes_announcement ? "" : `<span class="badge">引用なし</span>`,
     (isOut(e) && verdicts[e.id] !== "out") ? `<span class="badge warn">審査外（${e.isJudge ? "審査員" : "引用なし"}）</span>` : "",
-    e.needsCheck ? `<span class="badge warn">要確認</span>` : ""
+    e.needsCheck ? `<span class="badge warn">要確認</span>` : "",
+    aw0 ? `<span class="badge" style="background:#7b4fd8">${aw0.short}</span>` : ""
   ].join("");
   const vd = (isHost() && (e.needsCheck || verdicts[e.id])) ? `<div class="vd">
       <button data-v="in" aria-pressed="${verdicts[e.id]==="in"}">応募として扱う</button>
       <button data-v="out" aria-pressed="${verdicts[e.id]==="out"}">応募でない</button>
     </div>` : "";
   const why = e.needsCheck ? `<div class="row" style="color:#b06a10">${e.reasons.join("・")}</div>` : "";
+  const awardBtns = e.image_count ? awardsFor(e).map(a =>
+      `<button data-aw="${a.key}" aria-pressed="${awards[a.key]===e.id}">${a.short}</button>`).join("") : "";
+  const awardRow = awardBtns ? `<div class="awrow"><span>担当の賞</span>${awardBtns}</div>` : "";
   const avset = (isHost() && !e.avTag && e.image_count) ? `<div class="avset">
       <span>アバター</span>${AVATARS.map(a =>
         `<button data-a="${a.key}" aria-pressed="${avManual[e.id]===a.key}" style="--c:${a.color}">${a.name}</button>`).join("")}
@@ -393,7 +437,7 @@ function card(e){
         <button class="pick">${p?"選択を外す":"選ぶ"}</button>
         <button class="detail">大きく見る</button>
       </div>
-      ${vd}${avset}
+      ${awardRow}${vd}${avset}
     </div></article>`;
 }
 function escapeHtml(s){ return s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
@@ -417,12 +461,15 @@ function alertBar(msg){ const s = $("pickState"); const old = s.textContent; s.t
 function renderBar(){
   const list = Object.entries(picks).sort((a,b) => a[1].order - b[1].order);
   $("pickState").textContent = `${list.length} / ${MAX_PICK} 点（${judge}）`;
-  $("slots").innerHTML = Array.from({length: MAX_PICK}, (_,i) => {
-    const hit = list[i];
-    if (!hit) return `<div class="slot"></div>`;
-    const e = ENTRIES.find(x => x.id === hit[0]);
-    return `<div class="slot" title="@${e.author}"><img src="${img(e.images[0],"small")}" alt=""><span class="n">${i+1}</span></div>`;
-  }).join("");
+  const slot = (id, label) => {
+    const e = id ? ENTRIES.find(x => x.id === id) : null;
+    return e
+      ? `<div class="slot" title="@${e.author}"><img src="${img(e.images[0],"small")}" alt=""><span class="n">${label}</span></div>`
+      : `<div class="slot"><span class="n" style="color:var(--muted);text-shadow:none">${label}</span></div>`;
+  };
+  $("slots").innerHTML =
+    Array.from({length: MAX_PICK}, (_,i) => slot(list[i] ? list[i][0] : null, String(i+1))).join("")
+    + myAwards().map(a => `<span class="sep"></span>` + slot(awards[a.key], a.short)).join("");
 }
 
 /* ---- 詳細 ---- */
@@ -446,6 +493,11 @@ function fillModal(){
   $("mMemo").value = p ? (p.memo || "") : "";
   $("mMemo").disabled = !p;
   $("mMemo").placeholder = p ? "メモ（自分だけに見えます）" : "選ぶとメモを書けます";
+  const mA = awardsFor(e);
+  $("mAwards").innerHTML = mA.length
+    ? `<span>担当の賞</span>` + mA.map(a => `<button data-aw="${a.key}" aria-pressed="${awards[a.key]===e.id}">${a.label}</button>`).join("")
+    : "";
+  $("mAwards").querySelectorAll("button").forEach(b => b.onclick = () => toggleAward(b.dataset.aw, e.id));
   $("mThumbs").innerHTML = (e.images || []).map((u,i) =>
     `<img src="${img(u,"small")}" data-i="${i}" aria-current="${i===curImg}" alt="">`).join("");
   $("mThumbs").querySelectorAll("img").forEach(t => t.onclick = () => { curImg = +t.dataset.i; fillModal(); });
@@ -468,11 +520,21 @@ document.addEventListener("keydown", ev => {
 /* ---- 書き出し ---- */
 function exportText(){
   const list = Object.entries(picks).sort((a,b) => a[1].order - b[1].order);
-  if (!list.length) return `【${judge}の選出】まだ選んでいません`;
-  return `【${judge}の選出 ${list.length}点】\n` + list.map(([id,p],i) => {
-    const e = ENTRIES.find(x => x.id === id);
-    return `${i+1}. @${e.author}　${e.url}${p.memo ? "\n   メモ：" + p.memo : ""}`;
-  }).join("\n");
+  const head = `【${judge}の選出】`;
+  const sec1 = list.length
+    ? `■ 総合部門（5点まで）${list.length}点\n` + list.map(([id,p],i) => {
+        const e = ENTRIES.find(x => x.id === id);
+        return `${i+1}. @${e.author}　${e.url}${p.memo ? "\n   メモ：" + p.memo : ""}`;
+      }).join("\n")
+    : "■ 総合部門（5点まで）まだ選んでいません";
+  const mine = myAwards();
+  const sec2 = mine.length
+    ? "\n\n" + mine.map(a => {
+        const e = awards[a.key] ? ENTRIES.find(x => x.id === awards[a.key]) : null;
+        return `■ ${a.label}\n` + (e ? `@${e.author}　${e.url}` : "まだ選んでいません");
+      }).join("\n")
+    : "";
+  return head + "\n" + sec1 + sec2;
 }
 $("btnExport").onclick = () => {
   const box = $("exportBox");

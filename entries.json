@@ -10,7 +10,8 @@
   "hashtags": [],
   "quotes_announcement": true,
   "liked": true,
-  "sns_note": "応募ではない（感想コメント）"
+  "sns_note": "応募ではない（感想コメント）",
+  "entry_verdict": "out"
  },
  {
   "id": "2101128508307353882",
@@ -41,7 +42,8 @@
   "hashtags": [],
   "quotes_announcement": true,
   "liked": true,
-  "sns_note": "応募ではない（審査員立候補）"
+  "sns_note": "応募ではない（審査員立候補）",
+  "entry_verdict": "out"
  },
  {
   "id": "2101178791842492850",
@@ -54,7 +56,8 @@
   "hashtags": [],
   "quotes_announcement": true,
   "liked": true,
-  "sns_note": "応募ではない（KUROMARU9さんによる告知の拡散）"
+  "sns_note": "応募ではない（KUROMARU9さんによる告知の拡散）",
+  "entry_verdict": "out"
  },
  {
   "id": "2101179374842318956",
@@ -568,7 +571,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2101855330250657898",
@@ -584,7 +588,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2101863575476425075",
@@ -618,7 +623,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2101878935353188856",
@@ -651,7 +657,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2101893607414501876",
@@ -667,7 +674,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2101896596728471729",
@@ -700,7 +708,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2101920491544129536",
@@ -1060,7 +1069,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2102238110826541562",
@@ -1076,7 +1086,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2102249885210988975",
@@ -1092,7 +1103,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2102261506834653237",
@@ -1108,7 +1120,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2102267380990910466",
@@ -1141,7 +1154,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2102277384515068177",
@@ -1174,7 +1188,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2102296374381547743",
@@ -1259,7 +1274,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2102412607290474749",
@@ -1349,7 +1365,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2102585364229841225",
@@ -1430,7 +1447,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2102628683530002540",
@@ -1463,7 +1481,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2102664915417026910",
@@ -1564,7 +1583,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "midaris"
  },
  {
   "id": "2102766880373264495",
@@ -1685,7 +1705,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2102953442750919100",
@@ -1787,7 +1808,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": false,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "midaris"
  },
  {
   "id": "2102983609783287814",
@@ -1803,7 +1825,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2102993464426451085",
@@ -1819,7 +1842,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2102995219432284207",
@@ -1852,7 +1876,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103008613866545428",
@@ -1902,7 +1927,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103026386864939506",
@@ -1918,7 +1944,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103098781332050254",
@@ -1969,7 +1996,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": false,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103102232556409164",
@@ -1986,7 +2014,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": false,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103102556625137720",
@@ -2002,7 +2031,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": false,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103102807129882761",
@@ -2018,7 +2048,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": false,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103102954165379366",
@@ -2036,7 +2067,8 @@
   ],
   "quotes_announcement": false,
   "liked": true,
-  "image_fixed_by": "claude 2026-09-29（回収時の取りこぼしを補完）"
+  "image_fixed_by": "claude 2026-09-29（回収時の取りこぼしを補完）",
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103111718352380407",
@@ -2065,7 +2097,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103114192073220309",
@@ -2098,7 +2131,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103134425727037664",
@@ -2233,7 +2267,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103325387153723894",
@@ -2249,7 +2284,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103341710524969436",
@@ -2265,7 +2301,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103354529333010749",
@@ -2281,7 +2318,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103369815457145303",
@@ -2297,7 +2335,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103378368679014740",
@@ -2313,7 +2352,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103414508102508801",
@@ -2364,7 +2404,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "midaris"
  },
  {
   "id": "2103553549984751969",
@@ -2400,7 +2441,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "midaris"
  },
  {
   "id": "2103597952124297381",
@@ -2433,7 +2475,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "midaris"
  },
  {
   "id": "2103650050903802124",
@@ -2449,7 +2492,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103659243404743100",
@@ -2465,7 +2509,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103661473042162127",
@@ -2498,7 +2543,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103672818781257975",
@@ -2531,7 +2577,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103710814524117305",
@@ -2547,7 +2594,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103710995034300909",
@@ -2580,7 +2628,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2103725875355410937",
@@ -2919,7 +2968,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2104044135040864649",
@@ -2952,7 +3002,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2104073765550542921",
@@ -2968,7 +3019,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2104082371431833931",
@@ -2984,7 +3036,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2104085011792293999",
@@ -3051,7 +3104,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2104107330363380044",
@@ -3153,7 +3207,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2104149204193144955",
@@ -3402,7 +3457,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2104371036271833377",
@@ -3418,7 +3474,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2104378966459257209",
@@ -3434,7 +3491,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2104403751117480271",
@@ -3467,7 +3525,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2104449300277448796",
@@ -3483,7 +3542,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2104457536229486663",
@@ -3499,7 +3559,8 @@
    "#KUROMARUアバターフォトコン"
   ],
   "quotes_announcement": true,
-  "liked": true
+  "liked": true,
+  "avatar_manual": "shizuku"
  },
  {
   "id": "2104489752070365541",
@@ -3719,7 +3780,8 @@
    "#蠱惑のミダリス"
   ],
   "quotes_announcement": false,
-  "liked": true
+  "liked": true,
+  "entry_verdict": "in"
  },
  {
   "id": "2104668952710574143",
