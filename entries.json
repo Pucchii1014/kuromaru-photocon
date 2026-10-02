@@ -5310,7 +5310,8 @@
   "found_round": "2026-10-02",
   "found_via": [
    "search"
-  ]
+  ],
+  "entry_verdict": "out"
  },
  {
   "id": "2104875582622425277",
@@ -5330,7 +5331,8 @@
   "found_round": "2026-10-02",
   "found_via": [
    "search"
-  ]
+  ],
+  "entry_verdict": "out"
  },
  {
   "id": "2104877744366793214",
@@ -5366,7 +5368,8 @@
   "found_round": "2026-10-02",
   "found_via": [
    "search"
-  ]
+  ],
+  "entry_verdict": "out"
  },
  {
   "id": "2104890036789670084",
@@ -5430,7 +5433,8 @@
   "found_round": "2026-10-02",
   "found_via": [
    "search"
-  ]
+  ],
+  "entry_verdict": "out"
  },
  {
   "id": "2104894610036424837",
@@ -5694,7 +5698,8 @@
   "found_round": "2026-10-02",
   "found_via": [
    "search"
-  ]
+  ],
+  "entry_verdict": "out"
  },
  {
   "id": "2104898496570794005",
@@ -6109,7 +6114,8 @@
   "found_via": [
    "quotes",
    "search"
-  ]
+  ],
+  "entry_verdict": "in"
  },
  {
   "id": "2105160712020734116",
