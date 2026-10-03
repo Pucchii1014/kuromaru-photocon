@@ -38,8 +38,11 @@ h1 .sub{font-family:'Zen Kaku Gothic New';font-weight:500;font-size:13px;color:v
 .count{margin-left:auto;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
 .stamp{font-size:12px;font-weight:700;color:var(--rec);border:1px solid var(--rec);border-radius:999px;padding:3px 12px;font-variant-numeric:tabular-nums}
 .ctrls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
-.seg button{border:0;background:transparent;padding:6px 14px;font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.fbtn{display:none;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap}
+.seg{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card);max-width:100%;overflow-x:auto;scrollbar-width:none}
+.seg::-webkit-scrollbar{display:none}
+.seg button{border:0;background:transparent;padding:6px 14px;font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;flex:0 0 auto}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
 .seg button .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
 .chk{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px}
@@ -119,7 +122,7 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
 .hint{font-size:12px;color:var(--muted)}
 
 /* 下のバー */
-.bar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--card);border-top:1px solid var(--line);box-shadow:0 -6px 18px rgba(0,0,0,.08)}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--card);border-top:1px solid var(--line);box-shadow:0 -6px 18px rgba(0,0,0,.08);padding-bottom:env(safe-area-inset-bottom,0)}
 .bwrap{max-width:1600px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .slots{display:flex;gap:5px;flex-wrap:wrap}
 .slot{width:38px;height:38px;border-radius:7px;border:1px dashed var(--line);background:var(--bg);overflow:hidden;position:relative}
@@ -135,6 +138,42 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
 .export[data-open="1"]{display:block}
 .export textarea{width:100%;min-height:140px;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--bg);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
 @media (max-width:900px){.mbox{grid-template-columns:1fr;max-height:94vh}.mimg{max-height:46vh}.mimg img{max-height:46vh}}
+
+/* スマホ：ヘッダーと下のバーで画面が埋まってしまうので、絞り込みはボタンでたたむ */
+@media (max-width:640px){
+  .hwrap{padding:10px 12px 8px;gap:8px}
+  h1{font-size:20px}
+  h1 .sub{display:block;margin-left:0;font-size:11px}
+  .brow{gap:8px;align-items:center}
+  .stamp{font-size:11px;padding:2px 10px}
+  .count{margin-left:0;width:100%;font-size:11px;line-height:1.45}
+  .fbtn{display:inline-block}
+  .filters{display:none;width:100%}
+  .filters[data-open="1"]{display:flex}
+  .chk,select,.search{font-size:12px;padding:5px 10px}
+  .search{min-width:0;flex:1}
+  .who{margin-left:auto;font-size:12px}
+  main{padding:12px 12px 160px}
+  .grid{gap:10px}
+  .bwrap{padding:8px 12px;gap:6px}
+  .bar .st{width:100%;font-size:12px;order:-1}
+  .slots{flex-wrap:nowrap;overflow-x:auto;max-width:100%;min-width:0;scrollbar-width:none}
+  .slots::-webkit-scrollbar{display:none}
+  .slot{width:30px;height:30px;flex:0 0 auto;border-radius:6px}
+  .bar .out{margin-left:0;width:100%;flex-wrap:wrap}
+  .bar .out button{flex:1 1 44%;padding:8px 6px;font-size:12px}
+  .export{padding:0 12px 10px}
+  .export textarea{min-height:110px}
+  .modal{padding:8px}
+  .mbox{max-height:96vh}
+  .mside{padding:12px;gap:10px}
+  .mimg{min-height:0}
+  .mimg img{max-height:38vh}
+  /* スマホでは「選ぶ」「キープ」「担当の賞」を写真のすぐ下に出す（下までスクロールしないと押せないため） */
+  #mPick{order:-3}
+  #mKeep{order:-2}
+  #mAwards{order:-1}
+}
 </style>
 </head>
 <body>
@@ -147,20 +186,23 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
     </div>
     <div class="ctrls">
       <div class="seg" id="avseg"></div>
-      <label class="chk"><input type="checkbox" id="fSample"> Sampleのみ</label>
-      <label class="chk"><input type="checkbox" id="fLiked"> いいね済みのみ</label>
-      <label class="chk"><input type="checkbox" id="fNoimg"> 画像なしも表示</label>
-      <label class="chk"><input type="checkbox" id="fPicked"> 選んだものだけ</label>
-      <label class="chk keepchk"><input type="checkbox" id="fKeep"> キープだけ</label>
-      <label class="chk" id="wrapNew" hidden><input type="checkbox" id="fNew"> 新着だけ</label>
-      <label class="chk"><input type="checkbox" id="fCheck"> 要確認だけ</label>
-      <label class="chk" id="wrapOut" hidden><input type="checkbox" id="fOut"> 除外したものも表示</label>
-      <select id="sort">
-        <option value="new">新しい順</option>
-        <option value="old">古い順</option>
-        <option value="author">投稿者順</option>
-      </select>
-      <input class="search" id="q" type="search" placeholder="本文・投稿者で検索">
+      <button class="fbtn" id="fToggle" type="button" aria-expanded="false">絞り込み ＋</button>
+      <div class="filters" id="filters">
+        <label class="chk"><input type="checkbox" id="fSample"> Sampleのみ</label>
+        <label class="chk"><input type="checkbox" id="fLiked"> いいね済みのみ</label>
+        <label class="chk"><input type="checkbox" id="fNoimg"> 画像なしも表示</label>
+        <label class="chk"><input type="checkbox" id="fPicked"> 選んだものだけ</label>
+        <label class="chk keepchk"><input type="checkbox" id="fKeep"> キープだけ</label>
+        <label class="chk" id="wrapNew" hidden><input type="checkbox" id="fNew"> 新着だけ</label>
+        <label class="chk"><input type="checkbox" id="fCheck"> 要確認だけ</label>
+        <label class="chk" id="wrapOut" hidden><input type="checkbox" id="fOut"> 除外したものも表示</label>
+        <select id="sort">
+          <option value="new">新しい順</option>
+          <option value="old">古い順</option>
+          <option value="author">投稿者順</option>
+        </select>
+        <input class="search" id="q" type="search" placeholder="本文・投稿者で検索">
+      </div>
       <div class="who">審査員 <select id="judge"></select></div>
     </div>
     <p class="hint" id="warnStore" hidden style="margin:0;color:#b06a10">このブラウザでは選んだ内容が保存されません。閉じる前に「選んだ作品を書き出す」でコピーしてください。</p>
@@ -699,6 +741,20 @@ if (LATEST_ROUND) {
 
 const storageOK = (() => { try { localStorage.setItem("kmpc:t","1"); localStorage.removeItem("kmpc:t"); return true; } catch(_) { return false; } })();
 if (!storageOK) $("warnStore").hidden = false;
+
+// スマホ：絞り込みはボタンでたたむ（ヘッダーが画面を埋めてしまうため）
+$("fToggle").onclick = () => {
+  const f = $("filters");
+  const open = f.dataset.open === "1";
+  f.dataset.open = open ? "0" : "1";
+  $("fToggle").setAttribute("aria-expanded", String(!open));
+  $("fToggle").textContent = open ? "絞り込み ＋" : "絞り込み －";
+};
+// 下のバーの高さぶんだけ一覧の下に余白を空ける。バーの高さが変わっても作品が隠れない
+try {
+  const barEl = document.querySelector(".bar"), mainEl = document.querySelector("main");
+  new ResizeObserver(() => { mainEl.style.paddingBottom = (barEl.offsetHeight + 20) + "px"; }).observe(barEl);
+} catch(_) {}
 
 buildSeg();
 hostUI();
