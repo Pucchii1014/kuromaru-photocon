@@ -44,6 +44,7 @@ h1 .sub{font-family:'Zen Kaku Gothic New';font-weight:500;font-size:13px;color:v
 .seg button .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
 .chk{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px}
 .chk input{accent-color:var(--rec)}
+.chk.keepchk{border-color:#c79a2e;color:#a87f14}
 select,.search{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px;font-size:13px}
 .search{min-width:160px}
 .who{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
@@ -59,8 +60,12 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
 .badge{font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:rgba(0,0,0,.62);color:#fff;backdrop-filter:blur(2px)}
 .badge.av{color:#1e1b18}
 .pickmark{position:absolute;right:8px;top:8px;width:30px;height:30px;border-radius:50%;background:var(--rec);color:#fff;display:none;align-items:center;justify-content:center;font-weight:900;font-size:15px;font-variant-numeric:tabular-nums}
+.keepmark{position:absolute;right:8px;bottom:8px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.6);color:#ffd45e;display:none;align-items:center;justify-content:center;font-size:14px;line-height:1}
 .card.picked{outline:3px solid var(--rec);outline-offset:-3px}
 .card.picked .pickmark{display:flex}
+.card.kept{outline:3px solid #c79a2e;outline-offset:-3px}
+.card.kept .keepmark{display:flex}
+.card.kept.picked{outline-color:var(--rec)}
 .meta{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px}
 .meta .txt{font-size:13px;line-height:1.5;max-height:3em;overflow:hidden}
 .meta .row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
@@ -69,6 +74,9 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
 .acts button,.acts a{flex:1;text-align:center;border:1px solid var(--line);background:transparent;border-radius:8px;padding:6px 8px;font-size:12px;font-weight:700;text-decoration:none;color:var(--muted)}
 .acts .pick{border-color:var(--rec);color:var(--rec)}
 .card.picked .acts .pick{background:var(--rec);color:#fff}
+.acts .keep{border-color:#c79a2e;color:#a87f14}
+.card.kept .acts .keep{background:#c79a2e;color:#fff;border-color:#c79a2e}
+.acts .detail{flex:0 0 auto}
 .card.excluded{opacity:.45}
 .card.excluded .ph{filter:grayscale(1)}
 .vd{display:flex;gap:6px;margin-top:2px}
@@ -101,6 +109,8 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
 .memo{width:100%;min-height:76px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--bg);resize:vertical}
 .big{border:0;border-radius:10px;padding:10px;font-weight:900;font-size:14px;background:var(--rec);color:#fff}
 .big.off{background:transparent;color:var(--rec);border:2px solid var(--rec)}
+.big.keepbtn{background:transparent;color:#a87f14;border:2px solid #c79a2e}
+.big.keepbtn[aria-pressed="true"]{background:#c79a2e;color:#fff}
 .linkx{font-size:13px;color:var(--muted)}
 .thumbs{display:flex;gap:6px;flex-wrap:wrap}
 .thumbs img{width:56px;height:56px;object-fit:cover;border-radius:6px;border:2px solid transparent;cursor:pointer}
@@ -110,8 +120,8 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
 /* 下のバー */
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--card);border-top:1px solid var(--line);box-shadow:0 -6px 18px rgba(0,0,0,.08)}
 .bwrap{max-width:1600px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.slots{display:flex;gap:6px}
-.slot{width:44px;height:44px;border-radius:8px;border:1px dashed var(--line);background:var(--bg);overflow:hidden;position:relative}
+.slots{display:flex;gap:5px;flex-wrap:wrap}
+.slot{width:38px;height:38px;border-radius:7px;border:1px dashed var(--line);background:var(--bg);overflow:hidden;position:relative}
 .slot img{width:100%;height:100%;object-fit:cover}
 .slot .n{position:absolute;left:2px;top:1px;font-size:10px;font-weight:900;color:#fff;text-shadow:0 0 3px #000}
 .slots .sep{width:10px}
@@ -140,6 +150,7 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
       <label class="chk"><input type="checkbox" id="fLiked"> いいね済みのみ</label>
       <label class="chk"><input type="checkbox" id="fNoimg"> 画像なしも表示</label>
       <label class="chk"><input type="checkbox" id="fPicked"> 選んだものだけ</label>
+      <label class="chk keepchk"><input type="checkbox" id="fKeep"> キープだけ</label>
       <label class="chk" id="wrapNew" hidden><input type="checkbox" id="fNew"> 新着だけ</label>
       <label class="chk"><input type="checkbox" id="fCheck"> 要確認だけ</label>
       <label class="chk" id="wrapOut" hidden><input type="checkbox" id="fOut"> 除外したものも表示</label>
@@ -181,8 +192,9 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
       <textarea class="memo" id="mMemo" placeholder="メモ（自分だけに見えます）"></textarea>
       <div class="awrow" id="mAwards"></div>
       <button class="big" id="mPick">この作品を選ぶ</button>
+      <button class="big keepbtn" id="mKeep">キープに置く（K）</button>
       <button class="big off" id="mClose" style="background:transparent;color:var(--muted);border-color:var(--line)">閉じる（Esc）</button>
-      <p class="hint">←→ で前後の作品、S で選ぶ／外す</p>
+      <p class="hint">←→ で前後の作品、S で選ぶ／外す、K でキープ</p>
     </div>
   </div>
 </div>
@@ -199,7 +211,7 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
     </div>
   </div>
   <div class="export" id="exportBox">
-    <textarea id="exportText" placeholder="ここに前の版で書き出したテキストを貼り付けて「貼り付けから復元」を押すと、選んだ5点が戻ります"></textarea>
+    <textarea id="exportText" placeholder="ここに前の版で書き出したテキストを貼り付けて「貼り付けから復元」を押すと、選んだ作品・キープ・担当の賞が戻ります"></textarea>
   </div>
 </div>
 
@@ -219,9 +231,9 @@ else {
 }
 
 function start(){
-const MAX_PICK = 5;
+const MAX_PICK = 10;   // 総合部門で1人が選べる点数（9/15は5点 → 10/3に10点へ変更）
 const JUDGES = ["ぷっちー","kuromaru9","BIS","Wind-up"];
-// 担当の賞（総合部門の5点とは別枠。1つの賞につき1点）
+// 担当の賞（総合部門の10点とは別枠。1つの賞につき1点）
 const AWARDS = {
   "ぷっちー":  [{key:"judge_p", label:"審査員賞（ぷっちー）", short:"審査員賞"}],
   "BIS":       [{key:"judge_b", label:"審査員賞（BIS）",      short:"審査員賞"}],
@@ -265,6 +277,16 @@ const img = (u, size) => u ? u + "?format=jpg&name=" + size : "";
 let judge = load("judge") || JUDGES[0];
 let picks = load("picks:" + judge) || {};      // {id: {order, memo}}
 let awards = load("awards:" + judge) || {};    // {賞のkey: 作品のid}
+// キープ：枚数の制限がない仮置き棚。全部見ながら気になったものを置いて、あとでこの中から選ぶ
+let keeps = load("keeps:" + judge) || [];      // [id, ...]（置いた順）
+const isKept = id => keeps.includes(id);
+function toggleKeep(id){
+  const i = keeps.indexOf(id);
+  if (i >= 0) keeps.splice(i, 1); else keeps.push(id);
+  save("keeps:" + judge, keeps);
+  render();
+  if ($("modal").dataset.open === "1") fillModal();
+}
 const myAwards = () => AWARDS[judge] || [];
 // この作品に出す「担当の賞」のボタン：アバター別賞は、その子の作品にだけ出す
 function awardsFor(e){
@@ -316,6 +338,7 @@ judgeSel.onchange = () => {
   judge = judgeSel.value; save("judge", judge);
   picks = load("picks:" + judge) || {};
   awards = load("awards:" + judge) || {};
+  keeps = load("keeps:" + judge) || [];
   hostUI();
   render();
 };
@@ -338,7 +361,7 @@ function buildSeg(){
 
 /* ---- 絞り込みと並び替え ---- */
 const $ = id => document.getElementById(id);
-["fSample","fLiked","fNoimg","fPicked","fCheck","fOut","fNew"].forEach(id => $(id).onchange = render);
+["fSample","fLiked","fNoimg","fPicked","fKeep","fCheck","fOut","fNew"].forEach(id => $(id).onchange = render);
 $("sort").onchange = render;
 $("q").oninput = render;
 
@@ -349,14 +372,20 @@ else { $("fLiked").checked = true; }
 function filtered(){
   const q = $("q").value.trim().toLowerCase();
   let list = ENTRIES.filter(e => {
-    if (isOut(e) && !$("fOut").checked) return false;
+    const kept = isKept(e.id);
+    if ($("fKeep").checked && !kept) return false;
+    if ($("fPicked").checked && !picks[e.id]) return false;
+    // 「キープだけ」「選んだものだけ」で見ているときは、自分で置いたものがほかの条件で消えないようにする
+    const mine = ($("fKeep").checked && kept) || ($("fPicked").checked && !!picks[e.id]);
+    if (isOut(e) && !$("fOut").checked && !mine) return false;
     if ($("fCheck").checked && !e.needsCheck) return false;
     if ($("fNew").checked && !e.isNew) return false;
-    if (!$("fNoimg").checked && !e.image_count && !$("fCheck").checked) return false;
     if ($("fSample").checked && !e.isSample) return false;
-    // 主催が「応募として扱う」にしたものは、いいねが無くても表示する
-    if ($("fLiked").checked && e.liked !== true && verdicts[e.id] !== "in") return false;
-    if ($("fPicked").checked && !picks[e.id]) return false;
+    if (!mine) {
+      if (!$("fNoimg").checked && !e.image_count && !$("fCheck").checked) return false;
+      // 主催が「応募として扱う」にしたものは、いいねが無くても表示する
+      if ($("fLiked").checked && e.liked !== true && verdicts[e.id] !== "in") return false;
+    }
     const av = avOf(e);
     if (avFilter === "none" && av) return false;
     if (avFilter !== "all" && avFilter !== "none" && (!av || av.key !== avFilter)) return false;
@@ -388,6 +417,7 @@ function render(){
     const id = c.dataset.id;
     c.querySelector(".ph").onclick = () => { if (ENTRIES.find(x=>x.id===id).image_count) openModal(view.findIndex(x=>x.id===id)); };
     c.querySelector(".pick").onclick = () => togglePick(id);
+    c.querySelector(".keep").onclick = () => toggleKeep(id);
     c.querySelector(".detail").onclick = () => openModal(view.findIndex(x=>x.id===id));
     c.querySelectorAll(".awrow button").forEach(b => b.onclick = () => toggleAward(b.dataset.aw, id));
     c.querySelectorAll(".avset button").forEach(b => b.onclick = () => {
@@ -429,17 +459,19 @@ function card(e){
       <span>アバター</span>${AVATARS.map(a =>
         `<button data-a="${a.key}" aria-pressed="${avManual[e.id]===a.key}" style="--c:${a.color}">${a.name}</button>`).join("")}
     </div>` : "";
+  const kept = isKept(e.id);
   const photo = e.image_count
-    ? `<div class="ph"><img loading="lazy" src="${img(e.images[0],"small")}" alt=""><div class="badges">${badges}</div><div class="pickmark">${p?p.order:""}</div></div>`
+    ? `<div class="ph"><img loading="lazy" src="${img(e.images[0],"small")}" alt=""><div class="badges">${badges}</div><div class="pickmark">${p?p.order:""}</div><div class="keepmark">★</div></div>`
     : `<div class="ph noimg">画像なし<div class="badges">${badges}</div></div>`;
-  return `<article class="card ${p?"picked":""} ${isOut(e)?"excluded":""}" data-id="${e.id}">${photo}
+  return `<article class="card ${p?"picked":""} ${kept?"kept":""} ${isOut(e)?"excluded":""}" data-id="${e.id}">${photo}
     <div class="meta">
       <div class="txt">${escapeHtml(e.text || "")}</div>
       <div class="row"><span class="au">@${e.author}</span><span>${e.posted_at_jst}</span></div>
       ${why}
       <div class="acts">
-        <button class="pick">${p?"選択を外す":"選ぶ"}</button>
-        <button class="detail">大きく見る</button>
+        <button class="pick">${p?"外す":"選ぶ"}</button>
+        <button class="keep" aria-pressed="${kept}">${kept?"キープ中":"キープ"}</button>
+        <button class="detail">拡大</button>
       </div>
       ${awardRow}${vd}${avset}
     </div></article>`;
@@ -450,7 +482,7 @@ function escapeHtml(s){ return s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;
 function togglePick(id){
   if (picks[id]) { delete picks[id]; renumber(); }
   else {
-    if (Object.keys(picks).length >= MAX_PICK) { alertBar(`選べるのは${MAX_PICK}点までです。外してから選んでください。`); return; }
+    if (Object.keys(picks).length >= MAX_PICK) { alertBar(`選べるのは${MAX_PICK}点までです。迷っているものは「キープ」に置いておけます。`); return; }
     picks[id] = {order: Object.keys(picks).length + 1, memo: ""};
   }
   save("picks:" + judge, picks);
@@ -464,7 +496,7 @@ function alertBar(msg){ const s = $("pickState"); const old = s.textContent; s.t
 
 function renderBar(){
   const list = Object.entries(picks).sort((a,b) => a[1].order - b[1].order);
-  $("pickState").textContent = `${list.length} / ${MAX_PICK} 点（${judge}）`;
+  $("pickState").textContent = `${list.length} / ${MAX_PICK} 点・キープ ${keeps.length}件（${judge}）`;
   const slot = (id, label) => {
     const e = id ? ENTRIES.find(x => x.id === id) : null;
     return e
@@ -494,6 +526,9 @@ function fillModal(){
   $("mLink").href = e.url;
   $("mPick").textContent = p ? `選択を外す（${p.order}番目）` : "この作品を選ぶ";
   $("mPick").className = p ? "big" : "big off";
+  const kept = isKept(e.id);
+  $("mKeep").textContent = kept ? "キープから外す（K）" : "キープに置く（K）";
+  $("mKeep").setAttribute("aria-pressed", kept);
   $("mMemo").value = p ? (p.memo || "") : "";
   $("mMemo").disabled = !p;
   $("mMemo").placeholder = p ? "メモ（自分だけに見えます）" : "選ぶとメモを書けます";
@@ -510,6 +545,7 @@ $("mPrev").onclick = () => { if (cur > 0) { cur--; curImg = 0; fillModal(); } };
 $("mNext").onclick = () => { if (cur < view.length - 1) { cur++; curImg = 0; fillModal(); } };
 $("mClose").onclick = closeModal;
 $("mPick").onclick = () => togglePick(view[cur].id);
+$("mKeep").onclick = () => toggleKeep(view[cur].id);
 $("mMemo").oninput = () => { const e = view[cur]; if (picks[e.id]) { picks[e.id].memo = $("mMemo").value; save("picks:" + judge, picks); } };
 $("modal").onclick = ev => { if (ev.target.id === "modal") closeModal(); };
 document.addEventListener("keydown", ev => {
@@ -519,6 +555,7 @@ document.addEventListener("keydown", ev => {
   if (ev.key === "ArrowLeft") $("mPrev").click();
   if (ev.key === "ArrowRight") $("mNext").click();
   if (ev.key.toLowerCase() === "s") togglePick(view[cur].id);
+  if (ev.key.toLowerCase() === "k") toggleKeep(view[cur].id);
 });
 
 /* ---- 書き出し ---- */
@@ -526,11 +563,11 @@ function exportText(){
   const list = Object.entries(picks).sort((a,b) => a[1].order - b[1].order);
   const head = `【${judge}の選出】`;
   const sec1 = list.length
-    ? `■ 総合部門（5点まで）${list.length}点\n` + list.map(([id,p],i) => {
+    ? `■ 総合部門（${MAX_PICK}点まで）${list.length}点\n` + list.map(([id,p],i) => {
         const e = ENTRIES.find(x => x.id === id);
         return `${i+1}. @${e.author}　${e.url}${p.memo ? "\n   メモ：" + p.memo : ""}`;
       }).join("\n")
-    : "■ 総合部門（5点まで）まだ選んでいません";
+    : `■ 総合部門（${MAX_PICK}点まで）まだ選んでいません`;
   const mine = myAwards();
   const sec2 = mine.length
     ? "\n\n" + mine.map(a => {
@@ -538,7 +575,13 @@ function exportText(){
         return `■ ${a.label}\n` + (e ? `@${e.author}　${e.url}` : "まだ選んでいません");
       }).join("\n")
     : "";
-  return head + "\n" + sec1 + sec2;
+  // キープは自分の作業用。版が変わっても戻せるように末尾に付ける（主催に送るときは消してもよい）
+  const sec3 = keeps.length
+    ? `\n\n■ キープ ${keeps.length}件（自分用の控え。送らなくても大丈夫です）\n`
+      + keeps.map(id => { const e = ENTRIES.find(x => x.id === id); return e ? `・@${e.author}　${e.url}` : ""; })
+             .filter(Boolean).join("\n")
+    : "";
+  return head + "\n" + sec1 + sec2 + sec3;
 }
 $("btnExport").onclick = () => {
   const box = $("exportBox");
@@ -561,23 +604,62 @@ $("btnVerdict").onclick = () => {
         : "（なし）"
     }\n\n--- 貼り付け用（entry_verdict / avatar_manual）---\n${JSON.stringify(verdicts)}\n${JSON.stringify(avManual)}`;
 };
+// 書き出したテキストを「■ 見出し」ごとに切り分ける
+function parseSections(text){
+  const secs = []; let cur = null;
+  for (const line of text.split("\n")) {
+    const h = line.match(/^\s*■\s*(.+?)\s*$/);
+    if (h) { cur = {title: h[1], rows: []}; secs.push(cur); continue; }
+    if (cur) cur.rows.push(line);
+  }
+  return secs;
+}
+// その区画に並んでいる作品（ポストのURL）と、次の行のメモを拾う
+function rowsToItems(rows){
+  const out = [];
+  rows.forEach((line, i) => {
+    const m = line.match(/status\/(\d+)/); if (!m) return;
+    if (!ENTRIES.some(e => e.id === m[1])) { out.push({id: m[1], unknown: true, memo: ""}); return; }
+    const nx = (rows[i+1] || "").match(/メモ：(.*)$/);
+    out.push({id: m[1], memo: nx ? nx[1].trim() : ""});
+  });
+  return out;
+}
 $("btnRestore").onclick = () => {
   const box = $("exportBox");
   if (box.dataset.open !== "1") { box.dataset.open = "1"; $("exportText").value = ""; $("exportText").focus(); alertBar("前の版の書き出しを貼り付けてから、もう一度押してください"); return; }
   const text = $("exportText").value;
-  const ids = [...text.matchAll(/status\/(\d+)/g)].map(m => m[1]);
-  const memos = {};
-  text.split("\n").forEach((line, i, all) => {
-    const m = line.match(/status\/(\d+)/); if (!m) return;
-    const next = (all[i+1] || "").match(/メモ：(.*)$/); if (next) memos[m[1]] = next[1].trim();
-  });
-  const known = ids.filter(id => ENTRIES.some(e => e.id === id)).slice(0, MAX_PICK);
-  if (!known.length) { alertBar("この版に含まれる作品が見つかりませんでした"); return; }
-  picks = {};
-  known.forEach((id, i) => picks[id] = {order: i + 1, memo: memos[id] || ""});
-  save("picks:" + judge, picks);
+  const secs = parseSections(text);
+  const pickSec = secs.find(s => s.title.startsWith("総合部門"));
+  const keepSec = secs.find(s => s.title.startsWith("キープ"));
+  // 見出しが無い（URLだけ貼られた）ときは、全部を総合部門の選出として読む
+  const pickItems = secs.length ? (pickSec ? rowsToItems(pickSec.rows) : []) : rowsToItems(text.split("\n"));
+  const done = [];
+
+  const okPicks = pickItems.filter(x => !x.unknown).slice(0, MAX_PICK);
+  if (okPicks.length) {
+    picks = {};
+    okPicks.forEach((x, i) => picks[x.id] = {order: i + 1, memo: x.memo});
+    save("picks:" + judge, picks);
+    done.push(`総合${okPicks.length}点`);
+  }
+  if (keepSec) {
+    keeps = rowsToItems(keepSec.rows).filter(x => !x.unknown).map(x => x.id);
+    save("keeps:" + judge, keeps);
+    done.push(`キープ${keeps.length}件`);
+  }
+  let awN = 0;
+  for (const a of myAwards()) {
+    const s = secs.find(x => x.title === a.label); if (!s) continue;
+    const it = rowsToItems(s.rows).filter(x => !x.unknown)[0]; if (!it) continue;
+    awards[a.key] = it.id; awN++;
+  }
+  if (awN) { save("awards:" + judge, awards); done.push(`担当の賞${awN}点`); }
+
+  if (!done.length) { alertBar("この版に含まれる作品が見つかりませんでした"); return; }
+  const skipped = pickItems.filter(x => x.unknown).length;
   render();
-  alertBar(`${known.length}点を復元しました${ids.length > known.length ? "（この版にない作品は飛ばしました）" : ""}`);
+  alertBar(`${done.join("・")}を復元しました${skipped ? "（この版にない作品は飛ばしました）" : ""}`);
 };
 $("btnCopy").onclick = async () => {
   const t = exportText();
