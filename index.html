@@ -56,7 +56,7 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
 .card .ph{position:relative;aspect-ratio:16/10;background:#000;overflow:hidden;cursor:zoom-in}
 .card .ph img{width:100%;height:100%;object-fit:cover;display:block}
 .card .ph.noimg{display:flex;align-items:center;justify-content:center;background:var(--line);color:var(--muted);font-size:13px;cursor:default}
-.badges{position:absolute;left:8px;top:8px;display:flex;gap:6px;flex-wrap:wrap}
+.badges{position:absolute;left:8px;top:8px;display:flex;gap:6px;flex-wrap:wrap;max-width:calc(100% - 48px)}
 .badge{font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:rgba(0,0,0,.62);color:#fff;backdrop-filter:blur(2px)}
 .badge.av{color:#1e1b18}
 .pickmark{position:absolute;right:8px;top:8px;width:30px;height:30px;border-radius:50%;background:var(--rec);color:#fff;display:none;align-items:center;justify-content:center;font-weight:900;font-size:15px;font-variant-numeric:tabular-nums}
@@ -87,6 +87,7 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
 .avset span{font-size:11px;color:var(--muted);white-space:nowrap}
 .avset button{flex:1;border:1px solid var(--line);background:transparent;border-radius:8px;padding:4px 2px;font-size:11px;font-weight:700;color:var(--muted)}
 .avset button[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:#1e1b18}
+.avset button:disabled{cursor:default;opacity:1}
 .awrow{display:flex;gap:4px;align-items:center;margin-top:4px}
 .awrow span{font-size:11px;color:var(--muted);white-space:nowrap}
 .awrow button{flex:1;border:1px solid #7b4fd8;background:transparent;border-radius:8px;padding:4px 2px;font-size:11px;font-weight:700;color:#7b4fd8}
@@ -247,10 +248,10 @@ const AWARDS = {
 };
 // tags：公式タグ＋実際に使われた表記ゆれ
 const AVATARS = [
-  {key:"banana",  tags:["#バナナのばななちゃん"],   name:"ばななちゃん", color:"var(--banana)"},
-  {key:"shizuku", tags:["#びしょぬれのしずくさん"], name:"しずくさん",   color:"var(--shizuku)"},
-  {key:"melotron",tags:["#かんぺきメイドメロトロン"],name:"メロトロン",   color:"var(--melotron)"},
-  {key:"midaris", tags:["#蠱惑のミダリス","#蟲惑のミダリス"], name:"ミダリス", color:"var(--midaris)"}
+  {key:"banana",  tags:["#バナナのばななちゃん"],   name:"ばななちゃん", short:"ばなな", color:"var(--banana)"},
+  {key:"shizuku", tags:["#びしょぬれのしずくさん"], name:"しずくさん",   short:"しずく", color:"var(--shizuku)"},
+  {key:"melotron",tags:["#かんぺきメイドメロトロン"],name:"メロトロン",   short:"メロ",   color:"var(--melotron)"},
+  {key:"midaris", tags:["#蠱惑のミダリス","#蟲惑のミダリス"], name:"ミダリス", short:"ミダ", color:"var(--midaris)"}
 ];
 const TAG = "#KUROMARUアバターフォトコン";
 // この日時以降に投稿されたもので「引用なし（タグだけ）」は、いいねが付いていても自動で審査外にする。
@@ -259,7 +260,8 @@ const QUOTE_REQUIRED_FROM = "2026-09-30 00:00";
 // 審査員本人の投稿は審査対象外（参考作品）。主催の告知・拡散ポストもここで外れる
 const JUDGE_ACCOUNTS = ["VRChat_Pucchii", "kuromaru9", "Bismuth833", "Wind1653394"];
 const ENTRIES = (window.ENTRIES || []).map(e => {
-  const av = AVATARS.find(a => (e.hashtags||[]).some(t => a.tags.includes(t)));
+  // 1枚に複数のアバターが写っていることがあるので、当てはまるタグは全部拾う
+  const avTags = AVATARS.filter(a => (e.hashtags||[]).some(t => a.tags.includes(t))).map(a => a.key);
   const reasons = [];
   if (!e.image_count) reasons.push("画像なし（動画かもしれません）");
   if (!(e.hashtags||[]).includes(TAG)) reasons.push("コンテストのタグなし");
@@ -269,7 +271,7 @@ const ENTRIES = (window.ENTRIES || []).map(e => {
   const autoOut = isJudge || noQuoteOut;
   if (isJudge) reasons.push("審査員の投稿（参考作品・審査対象外）");
   if (noQuoteOut) reasons.push(`引用なし（${QUOTE_REQUIRED_FROM.slice(0,10)}以降はタグだけでは応募になりません）`);
-  return {...e, avTag: av ? av.key : null, autoOut, isJudge,
+  return {...e, avTags, autoOut, isJudge,
           isSample: /sample/i.test(e.text || ""), reasons, needsCheck: reasons.length > 0};
 });
 const img = (u, size) => u ? u + "?format=jpg&name=" + size : "";
@@ -291,7 +293,7 @@ const myAwards = () => AWARDS[judge] || [];
 // この作品に出す「担当の賞」のボタン：アバター別賞は、その子の作品にだけ出す
 function awardsFor(e){
   return myAwards().filter(a => {
-    if (a.av) { const av = avOf(e); return av ? av.key === a.av : true; }
+    if (a.av) { const ks = avKeys(e); return ks.length ? ks.includes(a.av) : true; }
     if (a.sampleOnly) return e.isSample;
     return true;
   });
@@ -307,20 +309,24 @@ function toggleAward(key, id){
 // 判定：データに書き戻された entry_verdict を土台に、この端末での判定を上書き
 let verdicts = Object.fromEntries(ENTRIES.filter(e => e.entry_verdict).map(e => [e.id, e.entry_verdict]));
 Object.assign(verdicts, load("verdict") || {});  // {id: "in" | "out"}（主催だけが付ける）
-// アバターの手動割り当て：タグがない作品に主催が付ける（データの avatar_manual が土台）
-let avManual = Object.fromEntries(ENTRIES.filter(e => e.avatar_manual).map(e => [e.id, e.avatar_manual]));
-Object.assign(avManual, load("avmanual") || {});
+// アバターの手動割り当て：主催が見て付ける（データの avatar_manual が土台）。
+// 集合写真があるので値は配列。古いデータは文字列なので読むときに配列へそろえる
+const asList = v => v == null ? [] : (Array.isArray(v) ? v : [v]);
+let avManual = Object.fromEntries(ENTRIES.filter(e => e.avatar_manual).map(e => [e.id, asList(e.avatar_manual)]));
+{ const saved = load("avmanual") || {}; for (const k in saved) avManual[k] = asList(saved[k]); }
 // 審査対象から外れるか：主催の判定が最優先。判定がなければ「引用なしの自動除外」を見る
 function isOut(e){
   if (verdicts[e.id] === "out") return true;
   if (verdicts[e.id] === "in") return false;
   return !!e.autoOut;
 }
-function avOf(e){
-  const key = e.avTag || avManual[e.id] || null;
-  if (!key) return null;
-  const a = AVATARS.find(x => x.key === key);
-  return a ? {...a, manual: !e.avTag} : null;
+// この作品に写っているアバター（タグで分かるぶん＋主催が手で足したぶん）。並び順はAVATARSどおり
+function avKeys(e){
+  const m = avManual[e.id] || [];
+  return AVATARS.map(a => a.key).filter(k => e.avTags.includes(k) || m.includes(k));
+}
+function avsOf(e){
+  return avKeys(e).map(k => ({...AVATARS.find(x => x.key === k), manual: !e.avTags.includes(k)}));
 }
 // 判定・アバター割り当ては主催だけ。URLの末尾に #host が付いているときだけ出す
 const isHost = () => judge === "ぷっちー" && location.hash === "#host";
@@ -352,7 +358,7 @@ function hostUI(){
 let avFilter = "all";
 const avseg = document.getElementById("avseg");
 function buildSeg(){
-  const items = [{key:"all",name:"すべて",color:null}, ...AVATARS, {key:"none",name:"タグなし",color:null}];
+  const items = [{key:"all",name:"すべて",color:null}, ...AVATARS, {key:"none",name:"割り当てなし",color:null}];
   avseg.innerHTML = items.map(i =>
     `<button data-k="${i.key}" aria-pressed="${i.key===avFilter}">${i.color?`<span class="dot" style="background:${i.color}"></span>`:""}${i.name}</button>`
   ).join("");
@@ -386,9 +392,9 @@ function filtered(){
       // 主催が「応募として扱う」にしたものは、いいねが無くても表示する
       if ($("fLiked").checked && e.liked !== true && verdicts[e.id] !== "in") return false;
     }
-    const av = avOf(e);
-    if (avFilter === "none" && av) return false;
-    if (avFilter !== "all" && avFilter !== "none" && (!av || av.key !== avFilter)) return false;
+    const ks = avKeys(e);
+    if (avFilter === "none" && ks.length) return false;
+    if (avFilter !== "all" && avFilter !== "none" && !ks.includes(avFilter)) return false;
     if (q && !((e.text||"").toLowerCase().includes(q) || e.author.toLowerCase().includes(q))) return false;
     return true;
   });
@@ -421,8 +427,10 @@ function render(){
     c.querySelector(".detail").onclick = () => openModal(view.findIndex(x=>x.id===id));
     c.querySelectorAll(".awrow button").forEach(b => b.onclick = () => toggleAward(b.dataset.aw, id));
     c.querySelectorAll(".avset button").forEach(b => b.onclick = () => {
-      avManual[id] = avManual[id] === b.dataset.a ? undefined : b.dataset.a;
-      if (!avManual[id]) delete avManual[id];
+      const list = (avManual[id] || []).slice();
+      const i = list.indexOf(b.dataset.a);
+      if (i >= 0) list.splice(i, 1); else list.push(b.dataset.a);
+      if (list.length) avManual[id] = list; else delete avManual[id];
       save("avmanual", avManual); render();
     });
     c.querySelectorAll(".vd button").forEach(b => b.onclick = () => {
@@ -435,10 +443,10 @@ function render(){
 }
 function card(e){
   const p = picks[e.id];
-  const av = avOf(e);
+  const avs = avsOf(e);
   const aw0 = awardOf(e);
   const badges = [
-    av ? `<span class="badge av" style="background:${av.color}">${av.name}${av.manual ? "（手動）" : ""}</span>` : "",
+    avs.map(a => `<span class="badge av" style="background:${a.color}">${avs.length > 1 ? a.short : a.name}${a.manual ? "（手動）" : ""}</span>`).join(""),
     e.isSample ? `<span class="badge" style="background:#2f7d32">Sample</span>` : "",
     e.image_count > 1 ? `<span class="badge">${e.image_count}枚</span>` : "",
     e.quotes_announcement ? "" : `<span class="badge">引用なし</span>`,
@@ -455,9 +463,13 @@ function card(e){
   const awardBtns = e.image_count ? awardsFor(e).map(a =>
       `<button data-aw="${a.key}" aria-pressed="${awards[a.key]===e.id}">${a.short}</button>`).join("") : "";
   const awardRow = awardBtns ? `<div class="awrow"><span>担当の賞</span>${awardBtns}</div>` : "";
-  const avset = (isHost() && !e.avTag && e.image_count) ? `<div class="avset">
-      <span>アバター</span>${AVATARS.map(a =>
-        `<button data-a="${a.key}" aria-pressed="${avManual[e.id]===a.key}" style="--c:${a.color}">${a.name}</button>`).join("")}
+  // 写っている子は何人でも付けられる。タグで付いているものは外せない（投稿者の申告なので）
+  const avset = (isHost() && e.image_count) ? `<div class="avset">
+      <span>アバター</span>${AVATARS.map(a => {
+        const byTag = e.avTags.includes(a.key);
+        const on = byTag || (avManual[e.id] || []).includes(a.key);
+        return `<button data-a="${a.key}" aria-pressed="${on}"${byTag ? " disabled title='タグで付いています'" : ""} style="--c:${a.color}">${a.short}</button>`;
+      }).join("")}
     </div>` : "";
   const kept = isKept(e.id);
   const photo = e.image_count
@@ -519,8 +531,10 @@ function fillModal(){
   $("mAuthor").textContent = "@" + e.author;
   $("mText").textContent = e.text || "（本文なし）";
   $("mTime").textContent = e.posted_at_jst;
-  const av = avOf(e);
-  $("mAv").textContent = av ? av.name + (av.manual ? "（主催が割り当て）" : "（タグ）") : "タグなし（見て判断）";
+  const avs = avsOf(e);
+  $("mAv").textContent = avs.length
+    ? avs.map(a => a.name + (a.manual ? "（主催が割り当て）" : "（タグ）")).join("、")
+    : "割り当てなし（見て判断）";
   $("mCount").textContent = e.image_count + "枚" + (e.image_count > 1 ? "（1枚目が作品）" : "");
   $("mLiked").textContent = e.liked === true ? "いいね済み" : e.liked === false ? "まだ" : "未取得";
   $("mLink").href = e.url;
@@ -597,9 +611,10 @@ $("btnVerdict").onclick = () => {
   $("exportText").value =
     `【応募でない（除外）${out.length}件】\n${f(out)}\n\n【応募として扱う ${inn.length}件】\n${f(inn)}\n\n【まだ判定していない要確認 ${pending.length}件】\n${f(pending)}\n\n【アバターの手動割り当て ${Object.keys(avManual).length}件】\n${
       Object.keys(avManual).length
-        ? Object.entries(avManual).map(([id,k]) => {
-            const e = ENTRIES.find(x => x.id === id); const a = AVATARS.find(x => x.key === k);
-            return `・${a ? a.name : k}　@${e?e.author:"?"}　${e?e.url:""}`;
+        ? Object.entries(avManual).map(([id,ks]) => {
+            const e = ENTRIES.find(x => x.id === id);
+            const names = asList(ks).map(k => { const a = AVATARS.find(x => x.key === k); return a ? a.name : k; }).join("＋");
+            return `・${names}　@${e?e.author:"?"}　${e?e.url:""}`;
           }).join("\n")
         : "（なし）"
     }\n\n--- 貼り付け用（entry_verdict / avatar_manual）---\n${JSON.stringify(verdicts)}\n${JSON.stringify(avManual)}`;
