@@ -196,6 +196,7 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
         <label class="chk" id="wrapNew" hidden><input type="checkbox" id="fNew"> 新着だけ</label>
         <label class="chk"><input type="checkbox" id="fCheck"> 要確認だけ</label>
         <label class="chk" id="wrapOut" hidden><input type="checkbox" id="fOut"> 除外したものも表示</label>
+        <label class="chk" id="wrapNoQuote" hidden><input type="checkbox" id="fNoQuote"> 引用なしだけ</label>
         <select id="sort">
           <option value="new">新しい順</option>
           <option value="old">古い順</option>
@@ -301,6 +302,9 @@ const TAG = "#KUROMARUアバターフォトコン";
 const QUOTE_REQUIRED_FROM = "2026-09-30 00:00";
 // 審査員本人の投稿は審査対象外（参考作品）。主催の告知・拡散ポストもここで外れる
 const JUDGE_ACCOUNTS = ["VRChat_Pucchii", "kuromaru9", "Bismuth833", "Wind1653394"];
+// 「引用なしだけ」の一覧から外す人。本人が「この人には声をかけなくていい」と決めた人を書く
+const QUOTE_SKIP = ["kua1123VRC"];
+const skipQuote = a => QUOTE_SKIP.some(h => h.toLowerCase() === (a || "").toLowerCase());
 const ENTRIES = (window.ENTRIES || []).map(e => {
   // 1枚に複数のアバターが写っていることがあるので、当てはまるタグは全部拾う
   const avTags = AVATARS.filter(a => (e.hashtags||[]).some(t => a.tags.includes(t))).map(a => a.key);
@@ -392,8 +396,9 @@ judgeSel.onchange = () => {
 };
 function hostUI(){
   $("wrapOut").hidden = !isHost();
+  $("wrapNoQuote").hidden = !isHost();
   $("btnVerdict").hidden = !isHost();
-  if (!isHost()) $("fOut").checked = false;
+  if (!isHost()) { $("fOut").checked = false; $("fNoQuote").checked = false; }
 }
 
 /* ---- アバターの絞り込み ---- */
@@ -409,7 +414,7 @@ function buildSeg(){
 
 /* ---- 絞り込みと並び替え ---- */
 const $ = id => document.getElementById(id);
-["fSample","fLiked","fNoimg","fPicked","fKeep","fCheck","fOut","fNew"].forEach(id => $(id).onchange = render);
+["fSample","fLiked","fNoimg","fPicked","fKeep","fNoQuote","fCheck","fOut","fNew"].forEach(id => $(id).onchange = render);
 $("sort").onchange = render;
 $("q").oninput = render;
 
@@ -423,8 +428,10 @@ function filtered(){
     const kept = isKept(e.id);
     if ($("fKeep").checked && !kept) return false;
     if ($("fPicked").checked && !picks[e.id]) return false;
-    // 「キープだけ」「選んだものだけ」で見ているときは、自分で置いたものがほかの条件で消えないようにする
-    const mine = ($("fKeep").checked && kept) || ($("fPicked").checked && !!picks[e.id]);
+    // 引用なしだけ：声をかける相手を探すための一覧（主催だけ）。QUOTE_SKIP の人は出さない
+    if ($("fNoQuote").checked && (e.quotes_announcement || skipQuote(e.author))) return false;
+    // 「キープだけ」「選んだものだけ」「引用なしだけ」で見ているときは、ほかの条件で消えないようにする
+    const mine = ($("fKeep").checked && kept) || ($("fPicked").checked && !!picks[e.id]) || $("fNoQuote").checked;
     if (isOut(e) && !$("fOut").checked && !mine) return false;
     if ($("fCheck").checked && !e.needsCheck) return false;
     if ($("fNew").checked && !e.isNew) return false;
@@ -649,9 +656,16 @@ $("btnVerdict").onclick = () => {
   const inn = Object.entries(verdicts).filter(([,v]) => v === "in").map(([id]) => ENTRIES.find(x=>x.id===id));
   const pending = ENTRIES.filter(e => e.needsCheck && !verdicts[e.id]);
   const f = list => list.length ? list.map(e => `・@${e.author}　${e.url}`).join("\n") : "（なし）";
+  // 引用なし（声かけ用）。QUOTE_SKIP の人・審査員・「応募でない」にした分は外す
+  const nq = ENTRIES.filter(e => !e.quotes_announcement && e.image_count && !e.isJudge
+      && verdicts[e.id] !== "out" && !skipQuote(e.author))
+    .sort((a, b) => a.posted_at_jst < b.posted_at_jst ? -1 : 1);
+  const nqLate  = nq.filter(e => e.posted_at_jst >= QUOTE_REQUIRED_FROM);
+  const nqEarly = nq.filter(e => e.posted_at_jst <  QUOTE_REQUIRED_FROM);
+  const g = list => list.length ? list.map(e => `・${e.posted_at_jst}　@${e.author}　${e.url}`).join("\n") : "（なし）";
   $("exportBox").dataset.open = "1";
   $("exportText").value =
-    `【応募でない（除外）${out.length}件】\n${f(out)}\n\n【応募として扱う ${inn.length}件】\n${f(inn)}\n\n【まだ判定していない要確認 ${pending.length}件】\n${f(pending)}\n\n【アバターの手動割り当て ${Object.keys(avManual).length}件】\n${
+    `【応募でない（除外）${out.length}件】\n${f(out)}\n\n【応募として扱う ${inn.length}件】\n${f(inn)}\n\n【まだ判定していない要確認 ${pending.length}件】\n${f(pending)}\n\n【引用なし・${QUOTE_REQUIRED_FROM.slice(0,10)}以降 ${nqLate.length}件（このままだと審査外。声をかける相手）】\n${g(nqLate)}\n\n【引用なし・それ以前 ${nqEarly.length}件（いいねで受付ずみ。連絡は不要）】\n${g(nqEarly)}\n\n【アバターの手動割り当て ${Object.keys(avManual).length}件】\n${
       Object.keys(avManual).length
         ? Object.entries(avManual).map(([id,ks]) => {
             const e = ENTRIES.find(x => x.id === id);
