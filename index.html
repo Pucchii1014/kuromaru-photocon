@@ -300,6 +300,8 @@ const TAG = "#KUROMARUアバターフォトコン";
 // この日時以降に投稿されたもので「引用なし（タグだけ）」は、いいねが付いていても自動で審査外にする。
 // それより前のものは、これまでどおり有効（いいね＝受付の合図として運用していたため）。
 const QUOTE_REQUIRED_FROM = "2026-09-30 00:00";
+// 応募の締切。これより後に投稿されたものは審査外（本人確認済 10/10）
+const ENTRY_DEADLINE = "2026-10-09 23:59";
 // 審査員本人の投稿は審査対象外（参考作品）。主催の告知・拡散ポストもここで外れる
 const JUDGE_ACCOUNTS = ["VRChat_Pucchii", "kuromaru9", "Bismuth833", "Wind1653394"];
 // 「引用なしだけ」の一覧から外す人。本人が「この人には声をかけなくていい」と決めた人を書く
@@ -314,10 +316,12 @@ const ENTRIES = (window.ENTRIES || []).map(e => {
   if (e.liked === false) reasons.push("いいねが付いていない");
   const isJudge = JUDGE_ACCOUNTS.some(h => h.toLowerCase() === (e.author || "").toLowerCase());
   const noQuoteOut = !e.quotes_announcement && (e.posted_at_jst || "") >= QUOTE_REQUIRED_FROM;
-  const autoOut = isJudge || noQuoteOut;
+  const lateOut = (e.posted_at_jst || "") > ENTRY_DEADLINE;
+  const autoOut = isJudge || noQuoteOut || lateOut;
   if (isJudge) reasons.push("審査員の投稿（参考作品・審査対象外）");
   if (noQuoteOut) reasons.push(`引用なし（${QUOTE_REQUIRED_FROM.slice(0,10)}以降はタグだけでは応募になりません）`);
-  return {...e, avTags, autoOut, isJudge,
+  if (lateOut) reasons.push(`締切後の投稿（締切は${ENTRY_DEADLINE}）`);
+  return {...e, avTags, autoOut, isJudge, lateOut,
           isSample: /sample/i.test(e.text || ""), reasons, needsCheck: reasons.length > 0};
 });
 const img = (u, size) => u ? u + "?format=jpg&name=" + size : "";
@@ -463,10 +467,11 @@ function render(){
   $("empty").hidden = view.length > 0;
   const total = ENTRIES.length, shown = view.length;
   const noimg = ENTRIES.filter(x => !x.image_count).length;
-  const autoQ = ENTRIES.filter(x => x.autoOut && !x.isJudge && verdicts[x.id] !== "in").length;
+  const autoQ = ENTRIES.filter(x => x.autoOut && !x.isJudge && !x.lateOut && verdicts[x.id] !== "in").length;
+  const autoL = ENTRIES.filter(x => x.lateOut && verdicts[x.id] !== "in").length;
   const autoJ = ENTRIES.filter(x => x.isJudge && verdicts[x.id] !== "in").length;
   $("count").textContent = `表示 ${shown}件 / 全${total}件（画像なし${noimg}件`
-    + (autoQ ? `・引用なしで審査外${autoQ}件` : "") + (autoJ ? `・審査員の作品${autoJ}件` : "")
+    + (autoQ ? `・引用なしで審査外${autoQ}件` : "") + (autoL ? `・締切後で審査外${autoL}件` : "") + (autoJ ? `・審査員の作品${autoJ}件` : "")
     + `）・投稿者${new Set(ENTRIES.map(x=>x.author)).size}人`;
   grid.querySelectorAll(".card").forEach(c => {
     const id = c.dataset.id;
@@ -499,7 +504,7 @@ function card(e){
     e.isSample ? `<span class="badge" style="background:#2f7d32">Sample</span>` : "",
     e.image_count > 1 ? `<span class="badge">${e.image_count}枚</span>` : "",
     e.quotes_announcement ? "" : `<span class="badge">引用なし</span>`,
-    (isOut(e) && verdicts[e.id] !== "out") ? `<span class="badge warn">審査外（${e.isJudge ? "審査員" : "引用なし"}）</span>` : "",
+    (isOut(e) && verdicts[e.id] !== "out") ? `<span class="badge warn">審査外（${e.isJudge ? "審査員" : e.lateOut ? "締切後" : "引用なし"}）</span>` : "",
     e.needsCheck ? `<span class="badge warn">要確認</span>` : "",
     aw0 ? `<span class="badge" style="background:#7b4fd8">${aw0.short}</span>` : "",
     e.isNew ? `<span class="badge" style="background:#2f7d32">新着</span>` : ""
