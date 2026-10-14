@@ -37,6 +37,8 @@ h1{font-family:'Yusei Magic',sans-serif;font-weight:400;font-size:26px;margin:0;
 h1 .sub{font-family:'Zen Kaku Gothic New';font-weight:500;font-size:13px;color:var(--muted);margin-left:12px}
 .count{margin-left:auto;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
 .stamp{font-size:12px;font-weight:700;color:var(--rec);border:1px solid var(--rec);border-radius:999px;padding:3px 12px;font-variant-numeric:tabular-nums}
+.votebtn{border:2px solid var(--rec);background:var(--rec);color:#fff;border-radius:999px;padding:5px 18px;font-size:13px;font-weight:900;white-space:nowrap}
+.votebtn[data-on="1"]{background:transparent;color:var(--rec)}
 .ctrls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .fbtn{display:none;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap}
@@ -182,6 +184,7 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
     <div class="brow">
       <h1>審査室<span class="sub">KUROMARUアバターフォトコンテスト</span></h1>
       <div class="stamp" id="stamp"></div>
+      <button class="votebtn" id="voteToggle" type="button" hidden>投票する</button>
       <div class="count" id="count">—</div>
     </div>
     <div class="ctrls">
@@ -302,6 +305,9 @@ const TAG = "#KUROMARUアバターフォトコン";
 const QUOTE_REQUIRED_FROM = "2026-09-30 00:00";
 // 応募の締切。これより後に投稿されたものは審査外（本人確認済 10/10）
 const ENTRY_DEADLINE = "2026-10-09 23:59";
+// 投票（10/17〜18）。候補はデータの vote_pool で入る。1位5点…5位1点で集計する
+const VOTE_MAX = 5;
+const VOTE_HIDE_AUTHOR = false;   // true にすると投票中だけ投稿者名を隠す
 // 審査員本人の投稿は審査対象外（参考作品）。主催の告知・拡散ポストもここで外れる
 const JUDGE_ACCOUNTS = ["VRChat_Pucchii", "kuromaru9", "Bismuth833", "Wind1653394"];
 // 「引用なしだけ」の一覧から外す人。本人が「この人には声をかけなくていい」と決めた人を書く
@@ -321,7 +327,7 @@ const ENTRIES = (window.ENTRIES || []).map(e => {
   if (isJudge) reasons.push("審査員の投稿（参考作品・審査対象外）");
   if (noQuoteOut) reasons.push(`引用なし（${QUOTE_REQUIRED_FROM.slice(0,10)}以降はタグだけでは応募になりません）`);
   if (lateOut) reasons.push(`締切後の投稿（締切は${ENTRY_DEADLINE}）`);
-  return {...e, avTags, autoOut, isJudge, lateOut,
+  return {...e, avTags, autoOut, isJudge, lateOut, inPool: !!e.vote_pool,
           isSample: /sample/i.test(e.text || ""), reasons, needsCheck: reasons.length > 0};
 });
 const img = (u, size) => u ? u + "?format=jpg&name=" + size : "";
@@ -329,6 +335,14 @@ const img = (u, size) => u ? u + "?format=jpg&name=" + size : "";
 let judge = load("judge") || JUDGES[0];
 let picks = load("picks:" + judge) || {};      // {id: {order, memo}}
 let awards = load("awards:" + judge) || {};    // {賞のkey: 作品のid}
+// 投票：選考が終わったあと、みんなの選出（vote_pool）から1〜5位を付ける。
+// 選ぶ仕組みは選考と同じものを使い回す（curSel / curMax で切り替える）
+let votes = load("vote:" + judge) || {};       // {id: {order}}
+const HAS_POOL = ENTRIES.some(e => e.inPool);
+let voteMode = false;
+const curSel = () => voteMode ? votes : picks;
+const curMax = () => voteMode ? VOTE_MAX : MAX_PICK;
+const selKey = () => (voteMode ? "vote:" : "picks:") + judge;
 // キープ：枚数の制限がない仮置き棚。全部見ながら気になったものを置いて、あとでこの中から選ぶ
 let keeps = load("keeps:" + judge) || [];      // [id, ...]（置いた順）
 const isKept = id => keeps.includes(id);
@@ -395,6 +409,7 @@ judgeSel.onchange = () => {
   picks = load("picks:" + judge) || {};
   awards = load("awards:" + judge) || {};
   keeps = load("keeps:" + judge) || [];
+  votes = load("vote:" + judge) || {};
   hostUI();
   render();
 };
@@ -428,6 +443,14 @@ else { $("fLiked").checked = true; }
 
 function filtered(){
   const q = $("q").value.trim().toLowerCase();
+  // 投票中は候補だけを並べる（ほかの絞り込みは効かせない）
+  if (voteMode) {
+    const vs = $("sort").value;
+    return ENTRIES.filter(e => e.inPool).sort((a,b) =>
+      vs === "author" ? a.author.localeCompare(b.author) || a.posted_at_jst.localeCompare(b.posted_at_jst)
+      : vs === "old"  ? a.posted_at_jst.localeCompare(b.posted_at_jst)
+      :                 b.posted_at_jst.localeCompare(a.posted_at_jst));
+  }
   let list = ENTRIES.filter(e => {
     const kept = isKept(e.id);
     if ($("fKeep").checked && !kept) return false;
@@ -473,11 +496,13 @@ function render(){
   $("count").textContent = `表示 ${shown}件 / 全${total}件（画像なし${noimg}件`
     + (autoQ ? `・引用なしで審査外${autoQ}件` : "") + (autoL ? `・締切後で審査外${autoL}件` : "") + (autoJ ? `・審査員の作品${autoJ}件` : "")
     + `）・投稿者${new Set(ENTRIES.map(x=>x.author)).size}人`;
+  if (voteMode) $("count").textContent =
+    `投票の候補 ${view.length}件（審査員みんなが選んだ作品）。1位〜${VOTE_MAX}位を付けてください`;
   grid.querySelectorAll(".card").forEach(c => {
     const id = c.dataset.id;
     c.querySelector(".ph").onclick = () => { if (ENTRIES.find(x=>x.id===id).image_count) openModal(view.findIndex(x=>x.id===id)); };
     c.querySelector(".pick").onclick = () => togglePick(id);
-    c.querySelector(".keep").onclick = () => toggleKeep(id);
+    const kb = c.querySelector(".keep"); if (kb) kb.onclick = () => toggleKeep(id);
     c.querySelector(".detail").onclick = () => openModal(view.findIndex(x=>x.id===id));
     c.querySelectorAll(".awrow button").forEach(b => b.onclick = () => toggleAward(b.dataset.aw, id));
     c.querySelectorAll(".avset button").forEach(b => b.onclick = () => {
@@ -496,7 +521,7 @@ function render(){
   renderBar();
 }
 function card(e){
-  const p = picks[e.id];
+  const p = curSel()[e.id];
   const avs = avsOf(e);
   const aw0 = awardOf(e);
   const badges = [
@@ -532,46 +557,55 @@ function card(e){
   return `<article class="card ${p?"picked":""} ${kept?"kept":""} ${isOut(e)?"excluded":""}" data-id="${e.id}">${photo}
     <div class="meta">
       <div class="txt">${escapeHtml(e.text || "")}</div>
-      <div class="row"><span class="au">@${e.author}</span><span>${e.posted_at_jst}</span></div>
+      <div class="row"><span class="au">${voteMode && VOTE_HIDE_AUTHOR ? "（投票中は非表示）" : "@" + e.author}</span><span>${e.posted_at_jst}</span></div>
       ${why}
       <div class="acts">
-        <button class="pick">${p?"外す":"選ぶ"}</button>
-        <button class="keep" aria-pressed="${kept}">${kept?"キープ中":"キープ"}</button>
+        <button class="pick">${voteMode ? (p ? p.order + "位（外す）" : "順位を付ける") : (p ? "外す" : "選ぶ")}</button>
+        ${voteMode ? "" : `<button class="keep" aria-pressed="${kept}">${kept?"キープ中":"キープ"}</button>`}
         <button class="detail">拡大</button>
       </div>
-      ${awardRow}${vd}${avset}
+      ${voteMode ? "" : awardRow + vd + avset}
     </div></article>`;
 }
 function escapeHtml(s){ return s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 
 /* ---- 選ぶ ---- */
 function togglePick(id){
-  if (picks[id]) { delete picks[id]; renumber(); }
+  const sel = curSel(), max = curMax();
+  if (sel[id]) { delete sel[id]; renumber(); }
   else {
-    if (Object.keys(picks).length >= MAX_PICK) { alertBar(`選べるのは${MAX_PICK}点までです。迷っているものは「キープ」に置いておけます。`); return; }
-    picks[id] = {order: Object.keys(picks).length + 1, memo: ""};
+    if (Object.keys(sel).length >= max) {
+      alertBar(voteMode ? `順位は${max}位までです。外してから付け直してください。`
+                        : `選べるのは${max}点までです。迷っているものは「キープ」に置いておけます。`);
+      return;
+    }
+    sel[id] = {order: Object.keys(sel).length + 1, memo: ""};
   }
-  save("picks:" + judge, picks);
+  save(selKey(), sel);
   render();
   if ($("modal").dataset.open === "1") fillModal();
 }
 function renumber(){
-  Object.entries(picks).sort((a,b) => a[1].order - b[1].order).forEach(([id],i) => picks[id].order = i + 1);
+  const sel = curSel();
+  Object.entries(sel).sort((a,b) => a[1].order - b[1].order).forEach(([id],i) => sel[id].order = i + 1);
 }
 function alertBar(msg){ const s = $("pickState"); const old = s.textContent; s.textContent = msg; setTimeout(() => renderBar(), 2600); }
 
 function renderBar(){
-  const list = Object.entries(picks).sort((a,b) => a[1].order - b[1].order);
-  $("pickState").textContent = `${list.length} / ${MAX_PICK} 点・キープ ${keeps.length}件（${judge}）`;
+  const list = Object.entries(curSel()).sort((a,b) => a[1].order - b[1].order);
+  $("pickState").textContent = voteMode
+    ? `${list.length} / ${VOTE_MAX} 位（${judge}）`
+    : `${list.length} / ${MAX_PICK} 点・キープ ${keeps.length}件（${judge}）`;
   const slot = (id, label) => {
     const e = id ? ENTRIES.find(x => x.id === id) : null;
     return e
       ? `<div class="slot" title="@${e.author}"><img src="${img(e.images[0],"small")}" alt=""><span class="n">${label}</span></div>`
       : `<div class="slot"><span class="n" style="color:var(--muted);text-shadow:none">${label}</span></div>`;
   };
-  $("slots").innerHTML =
-    Array.from({length: MAX_PICK}, (_,i) => slot(list[i] ? list[i][0] : null, String(i+1))).join("")
-    + myAwards().map(a => `<span class="sep"></span>` + slot(awards[a.key], a.short)).join("");
+  $("slots").innerHTML = voteMode
+    ? Array.from({length: VOTE_MAX}, (_,i) => slot(list[i] ? list[i][0] : null, (i+1) + "位")).join("")
+    : Array.from({length: MAX_PICK}, (_,i) => slot(list[i] ? list[i][0] : null, String(i+1))).join("")
+      + myAwards().map(a => `<span class="sep"></span>` + slot(awards[a.key], a.short)).join("");
 }
 
 /* ---- 詳細 ---- */
@@ -580,7 +614,7 @@ function openModal(i){ cur = i; curImg = 0; $("modal").dataset.open = "1"; fillM
 function closeModal(){ $("modal").dataset.open = "0"; }
 function fillModal(){
   const e = view[cur]; if (!e) return;
-  const p = picks[e.id];
+  const p = curSel()[e.id];
   $("mImg").src = img(e.images[curImg] || e.images[0], "large");
   $("mAuthor").textContent = "@" + e.author;
   $("mText").textContent = e.text || "（本文なし）";
@@ -592,15 +626,18 @@ function fillModal(){
   $("mCount").textContent = e.image_count + "枚" + (e.image_count > 1 ? "（1枚目が作品）" : "");
   $("mLiked").textContent = e.liked === true ? "いいね済み" : e.liked === false ? "まだ" : "未取得";
   $("mLink").href = e.url;
-  $("mPick").textContent = p ? `選択を外す（${p.order}番目）` : "この作品を選ぶ";
+  $("mPick").textContent = voteMode ? (p ? `${p.order}位（外す）` : "この作品に順位を付ける")
+                                    : (p ? `選択を外す（${p.order}番目）` : "この作品を選ぶ");
   $("mPick").className = p ? "big" : "big off";
   const kept = isKept(e.id);
+  $("mKeep").hidden = voteMode;
   $("mKeep").textContent = kept ? "キープから外す（K）" : "キープに置く（K）";
   $("mKeep").setAttribute("aria-pressed", kept);
-  $("mMemo").value = p ? (p.memo || "") : "";
-  $("mMemo").disabled = !p;
+  $("mMemo").hidden = voteMode;
+  $("mMemo").value = p && !voteMode ? (p.memo || "") : "";
+  $("mMemo").disabled = !p || voteMode;
   $("mMemo").placeholder = p ? "メモ（自分だけに見えます）" : "選ぶとメモを書けます";
-  const mA = awardsFor(e);
+  const mA = voteMode ? [] : awardsFor(e);
   $("mAwards").innerHTML = mA.length
     ? `<span>担当の賞</span>` + mA.map(a => `<button data-aw="${a.key}" aria-pressed="${awards[a.key]===e.id}">${a.label}</button>`).join("")
     : "";
@@ -614,7 +651,7 @@ $("mNext").onclick = () => { if (cur < view.length - 1) { cur++; curImg = 0; fil
 $("mClose").onclick = closeModal;
 $("mPick").onclick = () => togglePick(view[cur].id);
 $("mKeep").onclick = () => toggleKeep(view[cur].id);
-$("mMemo").oninput = () => { const e = view[cur]; if (picks[e.id]) { picks[e.id].memo = $("mMemo").value; save("picks:" + judge, picks); } };
+$("mMemo").oninput = () => { const e = view[cur]; if (!voteMode && picks[e.id]) { picks[e.id].memo = $("mMemo").value; save("picks:" + judge, picks); } };
 $("modal").onclick = ev => { if (ev.target.id === "modal") closeModal(); };
 document.addEventListener("keydown", ev => {
   if ($("modal").dataset.open !== "1") return;
@@ -628,6 +665,13 @@ document.addEventListener("keydown", ev => {
 
 /* ---- 書き出し ---- */
 function exportText(){
+  if (voteMode) {
+    const v = Object.entries(votes).sort((a,b) => a[1].order - b[1].order);
+    return `【${judge}の投票】\n` + (v.length
+      ? v.map(([id,p]) => { const e = ENTRIES.find(x => x.id === id);
+          return `${p.order}位（${VOTE_MAX + 1 - p.order}点）　@${e.author}　${e.url}`; }).join("\n")
+      : "まだ順位を付けていません");
+  }
   const list = Object.entries(picks).sort((a,b) => a[1].order - b[1].order);
   const head = `【${judge}の選出】`;
   const sec1 = list.length
@@ -774,6 +818,22 @@ try {
   const barEl = document.querySelector(".bar"), mainEl = document.querySelector("main");
   new ResizeObserver(() => { mainEl.style.paddingBottom = (barEl.offsetHeight + 20) + "px"; }).observe(barEl);
 } catch(_) {}
+
+// 投票モード：候補（vote_pool）がデータに入っているときだけボタンが出る
+$("voteToggle").hidden = !HAS_POOL;
+$("voteToggle").onclick = () => {
+  voteMode = !voteMode;
+  $("voteToggle").dataset.on = voteMode ? "1" : "0";
+  $("voteToggle").textContent = voteMode ? "選考の一覧に戻る" : "投票する";
+  $("btnExport").textContent = voteMode ? "投票を書き出す" : "選んだ作品を書き出す";
+  $("btnRestore").hidden = voteMode;
+  $("avseg").style.display = voteMode ? "none" : "";
+  $("filters").style.display = voteMode ? "none" : "";
+  $("fToggle").style.display = voteMode ? "none" : "";
+  $("exportBox").dataset.open = "0";
+  window.scrollTo(0, 0);
+  render();
+};
 
 buildSeg();
 hostUI();
