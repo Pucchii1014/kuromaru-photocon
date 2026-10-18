@@ -121,7 +121,11 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "kuromaru9",
+   "BIS"
+  ]
  },
  {
   "id": "2101184131539284428",
@@ -385,7 +389,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "BIS"
+  ]
  },
  {
   "id": "2101527987095212431",
@@ -675,7 +682,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "BIS"
+  ]
  },
  {
   "id": "2101687835141214246",
@@ -874,7 +884,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "ぷっちー"
+  ]
  },
  {
   "id": "2101836320272441450",
@@ -1729,7 +1742,11 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "kuromaru9",
+   "BIS"
+  ]
  },
  {
   "id": "2102286717420269981",
@@ -1889,7 +1906,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "BIS"
+  ]
  },
  {
   "id": "2102430287712141768",
@@ -1940,7 +1960,12 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "kuromaru9",
+   "BIS",
+   "ぷっちー"
+  ]
  },
  {
   "id": "2102562797976776962",
@@ -3443,7 +3468,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "kuromaru9"
+  ]
  },
  {
   "id": "2103611083546313143",
@@ -3468,7 +3496,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "BIS"
+  ]
  },
  {
   "id": "2103650050903802124",
@@ -4217,7 +4248,16 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "BIS"
+  ],
+  "award_by": [
+   {
+    "label": "審査員賞（BIS）",
+    "judge": "BIS"
+   }
+  ]
  },
  {
   "id": "2104085011792293999",
@@ -4838,7 +4878,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "Wind-up"
+  ]
  },
  {
   "id": "2104436802643992792",
@@ -5067,7 +5110,12 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "BIS",
+   "Wind-up",
+   "ぷっちー"
+  ]
  },
  {
   "id": "2104561090747371702",
@@ -5309,7 +5357,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "ぷっちー"
+  ]
  },
  {
   "id": "2104712332639457785",
@@ -5524,7 +5575,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "ぷっちー"
+  ]
  },
  {
   "id": "2104889929935544440",
@@ -6444,7 +6498,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "kuromaru9"
+  ]
  },
  {
   "id": "2105246065561866666",
@@ -6466,6 +6523,12 @@
   "found_via": [
    "quotes",
    "search"
+  ],
+  "award_by": [
+   {
+    "label": "アバター別賞（しずくさん）",
+    "judge": "kuromaru9"
+   }
   ]
  },
  {
@@ -6489,7 +6552,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "Wind-up"
+  ]
  },
  {
   "id": "2105304691378942168",
@@ -6511,6 +6577,12 @@
   "found_via": [
    "quotes",
    "search"
+  ],
+  "award_by": [
+   {
+    "label": "審査員賞（ぷっちー）",
+    "judge": "ぷっちー"
+   }
   ]
  },
  {
@@ -6623,7 +6695,16 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "ぷっちー"
+  ],
+  "award_by": [
+   {
+    "label": "アバター別賞（ミダリス）",
+    "judge": "kuromaru9"
+   }
+  ]
  },
  {
   "id": "2105419500992750064",
@@ -7359,7 +7440,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "ぷっちー"
+  ]
  },
  {
   "id": "2106036545757331708",
@@ -8094,7 +8178,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "kuromaru9"
+  ]
  },
  {
   "id": "2106625363778678825",
@@ -8272,7 +8359,11 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "kuromaru9",
+   "Wind-up"
+  ]
  },
  {
   "id": "2106795438255055075",
@@ -8340,7 +8431,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "Wind-up"
+  ]
  },
  {
   "id": "2106824489610969345",
@@ -8362,7 +8456,10 @@
   "found_via": [
    "quotes"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "kuromaru9"
+  ]
  },
  {
   "id": "2106834286439723313",
@@ -8555,7 +8652,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "Wind-up"
+  ]
  },
  {
   "id": "2106987752847716847",
@@ -8768,7 +8868,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "kuromaru9"
+  ]
  },
  {
   "id": "2107128132297957755",
@@ -8811,7 +8914,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "ぷっちー"
+  ]
  },
  {
   "id": "2107131415267840302",
@@ -10113,7 +10219,16 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "Wind-up"
+  ],
+  "award_by": [
+   {
+    "label": "アバター別賞（メロトロン）",
+    "judge": "kuromaru9"
+   }
+  ]
  },
  {
   "id": "2107783077972103437",
@@ -10464,7 +10579,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "BIS"
+  ]
  },
  {
   "id": "2108025048124792946",
@@ -11066,7 +11184,10 @@
   "found_via": [
    "quotes"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "kuromaru9"
+  ]
  },
  {
   "id": "2108193285462540738",
@@ -11774,7 +11895,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "Wind-up"
+  ]
  },
  {
   "id": "2108399552709414965",
@@ -11797,7 +11921,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "ぷっちー"
+  ]
  },
  {
   "id": "2108399556698194424",
@@ -12437,7 +12564,10 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "Wind-up"
+  ]
  },
  {
   "id": "2108510890190586174",
@@ -12569,6 +12699,12 @@
   "found_via": [
    "quotes",
    "search"
+  ],
+  "award_by": [
+   {
+    "label": "アバター別賞（ばななちゃん）",
+    "judge": "kuromaru9"
+   }
   ]
  },
  {
@@ -12594,6 +12730,12 @@
   "found_via": [
    "quotes",
    "search"
+  ],
+  "award_by": [
+   {
+    "label": "Sampleアバター賞",
+    "judge": "Wind-up"
+   }
   ]
  },
  {
@@ -13052,7 +13194,11 @@
    "quotes",
    "search"
   ],
-  "vote_pool": true
+  "vote_pool": true,
+  "sel_by": [
+   "Wind-up",
+   "ぷっちー"
+  ]
  },
  {
   "id": "2108550505173787110",

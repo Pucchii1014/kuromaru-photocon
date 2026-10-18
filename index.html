@@ -50,6 +50,11 @@ h1 .sub{font-family:'Zen Kaku Gothic New';font-weight:500;font-size:13px;color:v
 .chk{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px}
 .chk input{accent-color:var(--rec)}
 .chk.keepchk{border-color:#c79a2e;color:#a87f14}
+.chk.selchk{border-color:#7b4fd8;color:#7b4fd8}
+.selrow{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;font-size:11px;margin-top:2px}
+.selrow .sv{background:var(--ink);color:var(--bg);border-radius:999px;padding:2px 8px;font-weight:900}
+.selrow .sw{color:var(--muted);font-weight:700}
+.selrow .sa{background:#7b4fd8;color:#fff;border-radius:999px;padding:2px 8px;font-weight:700}
 select,.search{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px;font-size:13px}
 .search{min-width:160px}
 .who{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
@@ -200,6 +205,7 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
         <label class="chk"><input type="checkbox" id="fCheck"> 要確認だけ</label>
         <label class="chk" id="wrapOut" hidden><input type="checkbox" id="fOut"> 除外したものも表示</label>
         <label class="chk" id="wrapNoQuote" hidden><input type="checkbox" id="fNoQuote"> 引用なしだけ</label>
+        <label class="chk selchk" id="wrapSel" hidden><input type="checkbox" id="fSel"> 選考で選ばれた作品</label>
         <select id="sort">
           <option value="new">新しい順</option>
           <option value="old">古い順</option>
@@ -330,6 +336,7 @@ const ENTRIES = (window.ENTRIES || []).map(e => {
   if (noQuoteOut) reasons.push(`引用なし（${QUOTE_REQUIRED_FROM.slice(0,10)}以降はタグだけでは応募になりません）`);
   if (lateOut) reasons.push(`締切後の投稿（締切は${ENTRY_DEADLINE}）`);
   return {...e, avTags, autoOut, isJudge, lateOut, inPool: !!e.vote_pool,
+          selBy: e.sel_by || [], awardBy: e.award_by || [],
           isSample: /sample/i.test(e.text || ""), reasons, needsCheck: reasons.length > 0};
 });
 const img = (u, size) => u ? u + "?format=jpg&name=" + size : "";
@@ -418,8 +425,9 @@ judgeSel.onchange = () => {
 function hostUI(){
   $("wrapOut").hidden = !isHost();
   $("wrapNoQuote").hidden = !isHost();
+  $("wrapSel").hidden = !isHost() || !ENTRIES.some(e => e.selBy.length || e.awardBy.length);
   $("btnVerdict").hidden = !isHost();
-  if (!isHost()) { $("fOut").checked = false; $("fNoQuote").checked = false; }
+  if (!isHost()) { $("fOut").checked = false; $("fNoQuote").checked = false; $("fSel").checked = false; }
 }
 
 /* ---- アバターの絞り込み ---- */
@@ -435,7 +443,7 @@ function buildSeg(){
 
 /* ---- 絞り込みと並び替え ---- */
 const $ = id => document.getElementById(id);
-["fSample","fLiked","fNoimg","fPicked","fKeep","fNoQuote","fCheck","fOut","fNew"].forEach(id => $(id).onchange = render);
+["fSample","fLiked","fNoimg","fPicked","fKeep","fNoQuote","fSel","fCheck","fOut","fNew"].forEach(id => $(id).onchange = render);
 $("sort").onchange = render;
 $("q").oninput = render;
 
@@ -459,8 +467,10 @@ function filtered(){
     if ($("fPicked").checked && !picks[e.id]) return false;
     // 引用なしだけ：声をかける相手を探すための一覧（主催だけ）。QUOTE_SKIP の人は出さない
     if ($("fNoQuote").checked && (e.quotes_announcement || skipQuote(e.author))) return false;
-    // 「キープだけ」「選んだものだけ」「引用なしだけ」で見ているときは、ほかの条件で消えないようにする
-    const mine = ($("fKeep").checked && kept) || ($("fPicked").checked && !!picks[e.id]) || $("fNoQuote").checked;
+    // 選考で選ばれた作品：4人の総合の選出と担当の賞（主催の確認用）
+    if ($("fSel").checked && !(e.selBy.length || e.awardBy.length)) return false;
+    // 「キープだけ」「選んだものだけ」「引用なしだけ」「選考で選ばれた作品」で見ているときは、ほかの条件で消えないようにする
+    const mine = ($("fKeep").checked && kept) || ($("fPicked").checked && !!picks[e.id]) || $("fNoQuote").checked || $("fSel").checked;
     if (isOut(e) && !$("fOut").checked && !mine) return false;
     if ($("fCheck").checked && !e.needsCheck) return false;
     if ($("fNew").checked && !e.isNew) return false;
@@ -477,6 +487,9 @@ function filtered(){
     return true;
   });
   const s = $("sort").value;
+  // 選考で選ばれた作品を見ているときは、票の多い順（同じなら担当の賞があるほうを先）
+  if ($("fSel").checked) return list.sort((a,b) =>
+    (b.selBy.length - a.selBy.length) || (b.awardBy.length - a.awardBy.length) || a.posted_at_jst.localeCompare(b.posted_at_jst));
   list.sort((a,b) =>
     s === "author" ? a.author.localeCompare(b.author) || a.posted_at_jst.localeCompare(b.posted_at_jst)
     : s === "old"  ? a.posted_at_jst.localeCompare(b.posted_at_jst)
@@ -541,6 +554,10 @@ function card(e){
       <button data-v="out" aria-pressed="${verdicts[e.id]==="out"}">応募でない</button>
     </div>` : "";
   const why = e.needsCheck ? `<div class="row" style="color:#b06a10">${e.reasons.join("・")}</div>` : "";
+  // 主催の確認用：誰が総合で選んだか・どの賞に選ばれたか（投票中は出さない）
+  const selRow = (isHost() && !voteMode && (e.selBy.length || e.awardBy.length)) ? `<div class="selrow">${
+      e.selBy.length ? `<span class="sv">総合 ${e.selBy.length}票</span><span class="sw">${e.selBy.join("・")}</span>` : ""}${
+      e.awardBy.map(a => `<span class="sa">${a.label.includes(a.judge) ? a.label : a.label + "・" + a.judge}</span>`).join("")}</div>` : "";
   const awardBtns = e.image_count ? awardsFor(e).map(a =>
       `<button data-aw="${a.key}" aria-pressed="${awards[a.key]===e.id}">${a.short}</button>`).join("") : "";
   const awardRow = awardBtns ? `<div class="awrow"><span>担当の賞</span>${awardBtns}</div>` : "";
@@ -560,7 +577,7 @@ function card(e){
     <div class="meta">
       <div class="txt">${escapeHtml(e.text || "")}</div>
       <div class="row"><span class="au">${hideName() ? "（投票中は非表示）" : "@" + e.author}</span><span>${e.posted_at_jst}</span></div>
-      ${why}
+      ${why}${selRow}
       <div class="acts">
         <button class="pick">${voteMode ? (p ? p.order + "位（外す）" : "順位を付ける") : (p ? "外す" : "選ぶ")}</button>
         ${voteMode ? "" : `<button class="keep" aria-pressed="${kept}">${kept?"キープ中":"キープ"}</button>`}
