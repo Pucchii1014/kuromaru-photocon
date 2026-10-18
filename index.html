@@ -39,6 +39,18 @@ h1 .sub{font-family:'Zen Kaku Gothic New';font-weight:500;font-size:13px;color:v
 .stamp{font-size:12px;font-weight:700;color:var(--rec);border:1px solid var(--rec);border-radius:999px;padding:3px 12px;font-variant-numeric:tabular-nums}
 .votebtn{border:2px solid var(--rec);background:var(--rec);color:#fff;border-radius:999px;padding:5px 18px;font-size:13px;font-weight:900;white-space:nowrap}
 .votebtn[data-on="1"]{background:transparent;color:var(--rec)}
+.cmtbtn{border:2px solid #7b4fd8;background:#7b4fd8;color:#fff;border-radius:999px;padding:5px 18px;font-size:13px;font-weight:900;white-space:nowrap}
+.cmtbtn[data-on="1"]{background:transparent;color:#7b4fd8}
+#commentArea{display:flex;flex-direction:column;gap:14px;max-width:920px;margin:0 auto}
+#commentArea[hidden],.grid[hidden]{display:none}
+.cmt{display:grid;grid-template-columns:minmax(0,300px) 1fr;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow)}
+.cmt img{width:100%;border-radius:10px;display:block;background:#000}
+.cmt .clabel{font-weight:900;font-size:16px;color:#7b4fd8}
+.cmt .cau{font-size:13px;color:var(--muted);margin:4px 0 6px}
+.cmt .cau a{color:var(--muted)}
+.cmt textarea{width:100%;min-height:110px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--bg);margin-top:8px;resize:vertical;font-size:14px;line-height:1.6}
+.cmt.empty{display:block;opacity:.7}
+@media (max-width:640px){.cmt{grid-template-columns:1fr;padding:12px}.cmt img{max-height:38vh;object-fit:contain}}
 .ctrls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .fbtn{display:none;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap}
@@ -190,6 +202,7 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
       <h1>審査室<span class="sub">KUROMARUアバターフォトコンテスト</span></h1>
       <div class="stamp" id="stamp"></div>
       <button class="votebtn" id="voteToggle" type="button" hidden>投票する</button>
+      <button class="cmtbtn" id="cmtToggle" type="button" hidden>一言コメントを書く</button>
       <div class="count" id="count">—</div>
     </div>
     <div class="ctrls">
@@ -221,6 +234,7 @@ main{max-width:1600px;margin:0 auto;padding:18px 16px 120px}
 
 <main>
   <div class="grid" id="grid"></div>
+  <section id="commentArea" hidden></section>
   <p class="hint" id="empty" hidden>条件に合う作品がありません。</p>
 </main>
 
@@ -349,6 +363,11 @@ let awards = load("awards:" + judge) || {};    // {賞のkey: 作品のid}
 let votes = load("vote:" + judge) || {};       // {id: {order}}
 const HAS_POOL = ENTRIES.some(e => e.inPool);
 let voteMode = false;
+// 一言コメント（10/21〜23）：賞が決まった作品にはデータの prize_key が入る（set_prizes.js で書き込む）
+// 書いた内容は各自のブラウザに保存され、「コピー」でテキストにして主催に送ってもらう
+const HAS_PRIZE = ENTRIES.some(e => e.prize_key);
+let commentMode = false;
+let comments = load("comment:" + judge) || {};   // {prize_key: 本文}
 const curSel = () => voteMode ? votes : picks;
 const curMax = () => voteMode ? VOTE_MAX : MAX_PICK;
 const selKey = () => (voteMode ? "vote:" : "picks:") + judge;
@@ -419,7 +438,9 @@ judgeSel.onchange = () => {
   awards = load("awards:" + judge) || {};
   keeps = load("keeps:" + judge) || [];
   votes = load("vote:" + judge) || {};
+  comments = load("comment:" + judge) || {};
   hostUI();
+  if (commentMode) renderComments();
   render();
 };
 function hostUI(){
@@ -513,6 +534,8 @@ function render(){
     + `）・投稿者${new Set(ENTRIES.map(x=>x.author)).size}人`;
   if (voteMode) $("count").textContent =
     `投票の候補 ${view.length}件（審査員みんなが選んだ作品）。1位〜${VOTE_MAX}位を付けてください`;
+  if (commentMode) $("count").textContent =
+    "一言コメント：書いた内容はこのブラウザに保存されます。終わったら下の「コピー」でテキストを取って、Discordに貼ってください";
   grid.querySelectorAll(".card").forEach(c => {
     const id = c.dataset.id;
     c.querySelector(".ph").onclick = () => { if (ENTRIES.find(x=>x.id===id).image_count) openModal(view.findIndex(x=>x.id===id)); };
@@ -611,6 +634,12 @@ function renumber(){
 function alertBar(msg){ const s = $("pickState"); const old = s.textContent; s.textContent = msg; setTimeout(() => renderBar(), 2600); }
 
 function renderBar(){
+  if (commentMode) {
+    const t = myCommentTargets(), done = t.filter(x => x.e && (comments[x.key] || "").trim()).length;
+    $("pickState").textContent = `一言コメント ${done} / ${t.length}（${judge}）`;
+    $("slots").innerHTML = "";
+    return;
+  }
   const list = Object.entries(curSel()).sort((a,b) => a[1].order - b[1].order);
   $("pickState").textContent = voteMode
     ? `${list.length} / ${VOTE_MAX} 位（${judge}）`
@@ -684,7 +713,46 @@ document.addEventListener("keydown", ev => {
 });
 
 /* ---- 書き出し ---- */
+/* ---- 一言コメント ---- */
+// その審査員が書く欄：最優秀賞（全員）＋自分の担当の賞
+function myCommentTargets(){
+  const t = [];
+  const g = ENTRIES.find(e => e.prize_key === "grand");
+  t.push({key: "grand", label: "最優秀賞", e: g,
+          note: "感想をひとこと。ぷっちーが代表してまとめるので、公開用の文章でなくて大丈夫です"});
+  for (const a of myAwards()) t.push({key: a.key, label: a.label, e: ENTRIES.find(x => x.prize_key === a.key),
+          note: "選んだ理由を一言。短い言葉や単語だけでも大丈夫です"});
+  return t;
+}
+function renderComments(){
+  const box = $("commentArea");
+  box.innerHTML = myCommentTargets().map(x => x.e ? `
+    <div class="cmt">
+      <img src="${img(x.e.images[0], "medium")}" alt="">
+      <div>
+        <div class="clabel">${x.label}</div>
+        <div class="cau">@${x.e.author}　<a href="${x.e.url}" target="_blank" rel="noopener">元のポストを開く ↗</a></div>
+        <div class="hint">${x.note}</div>
+        <textarea data-k="${x.key}" placeholder="ここに一言">${escapeHtml(comments[x.key] || "")}</textarea>
+      </div>
+    </div>` : `
+    <div class="cmt empty">
+      <div class="clabel">${x.label}</div>
+      <div class="hint">まだ決まっていません。決まったらここに表示されます（賞が重なって選び直しになった場合など）</div>
+    </div>`).join("");
+  box.querySelectorAll("textarea").forEach(ta => ta.oninput = () => {
+    comments[ta.dataset.k] = ta.value; save("comment:" + judge, comments); renderBar();
+  });
+  renderBar();
+}
+function commentText(){
+  return `【${judge}の一言コメント】\n` + myCommentTargets().map(x =>
+    `■ ${x.label}` + (x.e ? `　@${x.e.author}　${x.e.url}` : "（未定）") + "\n"
+    + ((comments[x.key] || "").trim() || "（まだ書いていません）")).join("\n\n");
+}
+
 function exportText(){
+  if (commentMode) return commentText();
   if (voteMode) {
     const v = Object.entries(votes).sort((a,b) => a[1].order - b[1].order);
     return `【${judge}の投票】\n` + (v.length
@@ -841,19 +909,31 @@ try {
 
 // 投票モード：候補（vote_pool）がデータに入っているときだけボタンが出る
 $("voteToggle").hidden = !HAS_POOL;
-$("voteToggle").onclick = () => {
-  voteMode = !voteMode;
+// 画面の切り替え：選考（ふだん）／投票／一言コメント。同時には入らない
+function setMode(m){
+  voteMode = m === "vote";
+  commentMode = m === "comment";
+  const special = voteMode || commentMode;
   $("voteToggle").dataset.on = voteMode ? "1" : "0";
   $("voteToggle").textContent = voteMode ? "選考の一覧に戻る" : "投票する";
-  $("btnExport").textContent = voteMode ? "投票を書き出す" : "選んだ作品を書き出す";
-  $("btnRestore").hidden = voteMode;
-  $("avseg").style.display = voteMode ? "none" : "";
-  $("filters").style.display = voteMode ? "none" : "";
-  $("fToggle").style.display = voteMode ? "none" : "";
+  $("cmtToggle").dataset.on = commentMode ? "1" : "0";
+  $("cmtToggle").textContent = commentMode ? "選考の一覧に戻る" : "一言コメントを書く";
+  $("btnExport").textContent = commentMode ? "一言コメントを書き出す" : voteMode ? "投票を書き出す" : "選んだ作品を書き出す";
+  $("btnRestore").hidden = special;
+  $("avseg").style.display = special ? "none" : "";
+  $("filters").style.display = special ? "none" : "";
+  $("fToggle").style.display = special ? "none" : "";
+  $("grid").hidden = commentMode;
+  $("commentArea").hidden = !commentMode;
   $("exportBox").dataset.open = "0";
   window.scrollTo(0, 0);
   render();
-};
+  if (commentMode) renderComments();
+}
+$("voteToggle").onclick = () => setMode(voteMode ? "select" : "vote");
+// 一言コメント：賞が決まった（prize_key が入った）ときだけボタンが出る
+$("cmtToggle").hidden = !HAS_PRIZE;
+$("cmtToggle").onclick = () => setMode(commentMode ? "select" : "comment");
 
 buildSeg();
 hostUI();
