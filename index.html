@@ -307,7 +307,9 @@ const QUOTE_REQUIRED_FROM = "2026-09-30 00:00";
 const ENTRY_DEADLINE = "2026-10-09 23:59";
 // 投票（10/17〜18）。候補はデータの vote_pool で入る。1位5点…5位1点で集計する
 const VOTE_MAX = 5;
-const VOTE_HIDE_AUTHOR = false;   // true にすると投票中だけ投稿者名を隠す
+const VOTE_HIDE_AUTHOR = true;    // 投票中だけ投稿者名を隠す（本人確認済 10/18）。URLにも名前が入るので、URLは /i/status/<id> の形にする
+const hideName = () => voteMode && VOTE_HIDE_AUTHOR;
+const anonUrl = e => "https://x.com/i/status/" + e.id;   // 投稿者名の入らないURL（Xが本来のポストに転送する）
 // 審査員本人の投稿は審査対象外（参考作品）。主催の告知・拡散ポストもここで外れる
 const JUDGE_ACCOUNTS = ["VRChat_Pucchii", "kuromaru9", "Bismuth833", "Wind1653394"];
 // 「引用なしだけ」の一覧から外す人。本人が「この人には声をかけなくていい」と決めた人を書く
@@ -557,7 +559,7 @@ function card(e){
   return `<article class="card ${p?"picked":""} ${kept?"kept":""} ${isOut(e)?"excluded":""}" data-id="${e.id}">${photo}
     <div class="meta">
       <div class="txt">${escapeHtml(e.text || "")}</div>
-      <div class="row"><span class="au">${voteMode && VOTE_HIDE_AUTHOR ? "（投票中は非表示）" : "@" + e.author}</span><span>${e.posted_at_jst}</span></div>
+      <div class="row"><span class="au">${hideName() ? "（投票中は非表示）" : "@" + e.author}</span><span>${e.posted_at_jst}</span></div>
       ${why}
       <div class="acts">
         <button class="pick">${voteMode ? (p ? p.order + "位（外す）" : "順位を付ける") : (p ? "外す" : "選ぶ")}</button>
@@ -599,7 +601,7 @@ function renderBar(){
   const slot = (id, label) => {
     const e = id ? ENTRIES.find(x => x.id === id) : null;
     return e
-      ? `<div class="slot" title="@${e.author}"><img src="${img(e.images[0],"small")}" alt=""><span class="n">${label}</span></div>`
+      ? `<div class="slot" title="${hideName() ? "" : "@" + e.author}"><img src="${img(e.images[0],"small")}" alt=""><span class="n">${label}</span></div>`
       : `<div class="slot"><span class="n" style="color:var(--muted);text-shadow:none">${label}</span></div>`;
   };
   $("slots").innerHTML = voteMode
@@ -616,7 +618,7 @@ function fillModal(){
   const e = view[cur]; if (!e) return;
   const p = curSel()[e.id];
   $("mImg").src = img(e.images[curImg] || e.images[0], "large");
-  $("mAuthor").textContent = "@" + e.author;
+  $("mAuthor").textContent = hideName() ? "（投票中は非表示）" : "@" + e.author;
   $("mText").textContent = e.text || "（本文なし）";
   $("mTime").textContent = e.posted_at_jst;
   const avs = avsOf(e);
@@ -626,6 +628,7 @@ function fillModal(){
   $("mCount").textContent = e.image_count + "枚" + (e.image_count > 1 ? "（1枚目が作品）" : "");
   $("mLiked").textContent = e.liked === true ? "いいね済み" : e.liked === false ? "まだ" : "未取得";
   $("mLink").href = e.url;
+  $("mLink").hidden = hideName();   // 元のポストを開くと名前が分かるので、投票中は出さない
   $("mPick").textContent = voteMode ? (p ? `${p.order}位（外す）` : "この作品に順位を付ける")
                                     : (p ? `選択を外す（${p.order}番目）` : "この作品を選ぶ");
   $("mPick").className = p ? "big" : "big off";
@@ -669,7 +672,7 @@ function exportText(){
     const v = Object.entries(votes).sort((a,b) => a[1].order - b[1].order);
     return `【${judge}の投票】\n` + (v.length
       ? v.map(([id,p]) => { const e = ENTRIES.find(x => x.id === id);
-          return `${p.order}位（${VOTE_MAX + 1 - p.order}点）　@${e.author}　${e.url}`; }).join("\n")
+          return `${p.order}位（${VOTE_MAX + 1 - p.order}点）　${hideName() ? anonUrl(e) : "@" + e.author + "　" + e.url}`; }).join("\n")
       : "まだ順位を付けていません");
   }
   const list = Object.entries(picks).sort((a,b) => a[1].order - b[1].order);
