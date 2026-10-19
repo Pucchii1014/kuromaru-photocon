@@ -540,7 +540,7 @@ function render(){
     (RV ? `最優秀賞の再投票：同点だった${view.length}作品のうち、最優秀賞にふさわしいと思うほうを1つ選んでください`
         : `投票の候補 ${view.length}件（審査員みんなが選んだ作品）。1位〜${VOTE_MAX}位を付けてください`);
   if (commentMode) $("count").textContent =
-    "一言コメント：書いた内容はこのブラウザに保存されます。終わったら下の「コピー」でテキストを取って、Discordに貼ってください";
+    "一言コメント：書いた内容はこのブラウザに保存されます。終わったら下の「コピー」でテキストを取って、Discordの #選んだ写真text書き出し所 に貼ってください";
   grid.querySelectorAll(".card").forEach(c => {
     const id = c.dataset.id;
     c.querySelector(".ph").onclick = () => { if (ENTRIES.find(x=>x.id===id).image_count) openModal(view.findIndex(x=>x.id===id)); };
@@ -756,12 +756,21 @@ function commentText(){
     + ((comments[x.key] || "").trim() || "（まだ書いていません）")).join("\n\n");
 }
 
+// 投票の書き出しに使うコード（審査員ごとに違う6文字）。URLをDiscordに貼ると、プレビューで投稿者名が出て、
+// 誰がどれを選んだかもほかの審査員に見えてしまうため。集計は tally_revote.js で同じ計算をして元に戻す
+function voteCode(id){
+  let h = 0x811c9dc5;
+  const s = judge + ":" + id;
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+  return h.toString(36).toUpperCase().padStart(7, "0").slice(-6);
+}
+
 function exportText(){
   if (commentMode) return commentText();
   if (voteMode && RV) {
     const v = Object.keys(votes);
     return `【${judge}の再投票（最優秀賞）】\n` + (v.length
-      ? "選んだ作品　" + (e => hideName() ? anonUrl(e) : "@" + e.author + "　" + e.url)(ENTRIES.find(x => x.id === v[0]))
+      ? "投票コード：" + voteCode(v[0]) + "\n（集計用のコードです。どちらを選んだかは、ほかの人には分かりません）"
       : "まだ選んでいません");
   }
   if (voteMode) {
