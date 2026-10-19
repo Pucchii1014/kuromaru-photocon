@@ -326,7 +326,11 @@ const QUOTE_REQUIRED_FROM = "2026-09-30 00:00";
 // 応募の締切。これより後に投稿されたものは審査外（本人確認済 10/10）
 const ENTRY_DEADLINE = "2026-10-09 23:59";
 // 投票（10/17〜18）。候補はデータの vote_pool で入る。1位5点…5位1点で集計する
-const VOTE_MAX = 5;
+// 1＝通常の投票（候補から1〜5位）／2＝最優秀賞の再投票（同点の2作品から1つ選ぶ）。本人確認済 10/20
+const VOTE_ROUND = 2;
+const RV = VOTE_ROUND === 2;
+const VOTE_MAX = RV ? 1 : 5;
+const VOTE_KEY = RV ? "vote2:" : "vote:";   // 再投票は保存先を分けて、1回目の順位と混ざらないようにする
 const VOTE_HIDE_AUTHOR = true;    // 投票中だけ投稿者名を隠す（本人確認済 10/18）。URLにも名前が入るので、URLは /i/status/<id> の形にする
 const hideName = () => voteMode && VOTE_HIDE_AUTHOR;
 const anonUrl = e => "https://x.com/i/status/" + e.id;   // 投稿者名の入らないURL（Xが本来のポストに転送する）
@@ -360,7 +364,7 @@ let picks = load("picks:" + judge) || {};      // {id: {order, memo}}
 let awards = load("awards:" + judge) || {};    // {賞のkey: 作品のid}
 // 投票：選考が終わったあと、みんなの選出（vote_pool）から1〜5位を付ける。
 // 選ぶ仕組みは選考と同じものを使い回す（curSel / curMax で切り替える）
-let votes = load("vote:" + judge) || {};       // {id: {order}}
+let votes = load(VOTE_KEY + judge) || {};       // {id: {order}}
 const HAS_POOL = ENTRIES.some(e => e.inPool);
 let voteMode = false;
 // 一言コメント（10/21〜23）：賞が決まった作品にはデータの prize_key が入る（set_prizes.js で書き込む）
@@ -370,7 +374,7 @@ let commentMode = false;
 let comments = load("comment:" + judge) || {};   // {prize_key: 本文}
 const curSel = () => voteMode ? votes : picks;
 const curMax = () => voteMode ? VOTE_MAX : MAX_PICK;
-const selKey = () => (voteMode ? "vote:" : "picks:") + judge;
+const selKey = () => (voteMode ? VOTE_KEY : "picks:") + judge;
 // キープ：枚数の制限がない仮置き棚。全部見ながら気になったものを置いて、あとでこの中から選ぶ
 let keeps = load("keeps:" + judge) || [];      // [id, ...]（置いた順）
 const isKept = id => keeps.includes(id);
@@ -437,7 +441,7 @@ judgeSel.onchange = () => {
   picks = load("picks:" + judge) || {};
   awards = load("awards:" + judge) || {};
   keeps = load("keeps:" + judge) || [];
-  votes = load("vote:" + judge) || {};
+  votes = load(VOTE_KEY + judge) || {};
   comments = load("comment:" + judge) || {};
   hostUI();
   if (commentMode) renderComments();
@@ -533,7 +537,8 @@ function render(){
     + (autoQ ? `・引用なしで審査外${autoQ}件` : "") + (autoL ? `・締切後で審査外${autoL}件` : "") + (autoJ ? `・審査員の作品${autoJ}件` : "")
     + `）・投稿者${new Set(ENTRIES.map(x=>x.author)).size}人`;
   if (voteMode) $("count").textContent =
-    `投票の候補 ${view.length}件（審査員みんなが選んだ作品）。1位〜${VOTE_MAX}位を付けてください`;
+    (RV ? `最優秀賞の再投票：同点だった${view.length}作品のうち、最優秀賞にふさわしいと思うほうを1つ選んでください`
+        : `投票の候補 ${view.length}件（審査員みんなが選んだ作品）。1位〜${VOTE_MAX}位を付けてください`);
   if (commentMode) $("count").textContent =
     "一言コメント：書いた内容はこのブラウザに保存されます。終わったら下の「コピー」でテキストを取って、Discordに貼ってください";
   grid.querySelectorAll(".card").forEach(c => {
@@ -570,7 +575,7 @@ function card(e){
     (isOut(e) && verdicts[e.id] !== "out") ? `<span class="badge warn">審査外（${e.isJudge ? "審査員" : e.lateOut ? "締切後" : "引用なし"}）</span>` : "",
     e.needsCheck ? `<span class="badge warn">要確認</span>` : "",
     aw0 ? `<span class="badge" style="background:#7b4fd8">${aw0.short}</span>` : "",
-    e.isNew ? `<span class="badge" style="background:#2f7d32">新着</span>` : ""
+    e.isNew && !voteMode ? `<span class="badge" style="background:#2f7d32">新着</span>` : ""   // 投票中は出さない（片方だけに付くと印象が偏るため）
   ].join("");
   const vd = (isHost() && (e.needsCheck || verdicts[e.id])) ? `<div class="vd">
       <button data-v="in" aria-pressed="${verdicts[e.id]==="in"}">応募として扱う</button>
@@ -594,7 +599,7 @@ function card(e){
     </div>` : "";
   const kept = isKept(e.id);
   const photo = e.image_count
-    ? `<div class="ph"><img loading="lazy" src="${img(e.images[0],"small")}" alt=""><div class="badges">${badges}</div><div class="pickmark">${p?p.order:""}</div><div class="keepmark">★</div></div>`
+    ? `<div class="ph"><img loading="lazy" src="${img(e.images[0],"small")}" alt=""><div class="badges">${badges}</div><div class="pickmark">${p ? (RV && voteMode ? "✓" : p.order) : ""}</div><div class="keepmark">★</div></div>`
     : `<div class="ph noimg">画像なし<div class="badges">${badges}</div></div>`;
   return `<article class="card ${p?"picked":""} ${kept?"kept":""} ${isOut(e)?"excluded":""}" data-id="${e.id}">${photo}
     <div class="meta">
@@ -602,7 +607,7 @@ function card(e){
       <div class="row"><span class="au">${hideName() ? "（投票中は非表示）" : "@" + e.author}</span><span>${e.posted_at_jst}</span></div>
       ${why}${selRow}
       <div class="acts">
-        <button class="pick">${voteMode ? (p ? p.order + "位（外す）" : "順位を付ける") : (p ? "外す" : "選ぶ")}</button>
+        <button class="pick">${voteMode ? (RV ? (p ? "選んだ（外す）" : "これを選ぶ") : (p ? p.order + "位（外す）" : "順位を付ける")) : (p ? "外す" : "選ぶ")}</button>
         ${voteMode ? "" : `<button class="keep" aria-pressed="${kept}">${kept?"キープ中":"キープ"}</button>`}
         <button class="detail">拡大</button>
       </div>
@@ -617,7 +622,7 @@ function togglePick(id){
   if (sel[id]) { delete sel[id]; renumber(); }
   else {
     if (Object.keys(sel).length >= max) {
-      alertBar(voteMode ? `順位は${max}位までです。外してから付け直してください。`
+      alertBar(voteMode ? (RV ? "選べるのは1つです。外してから選び直してください。" : `順位は${max}位までです。外してから付け直してください。`)
                         : `選べるのは${max}点までです。迷っているものは「キープ」に置いておけます。`);
       return;
     }
@@ -642,7 +647,7 @@ function renderBar(){
   }
   const list = Object.entries(curSel()).sort((a,b) => a[1].order - b[1].order);
   $("pickState").textContent = voteMode
-    ? `${list.length} / ${VOTE_MAX} 位（${judge}）`
+    ? (RV ? `${list.length ? "選びました" : "まだ選んでいません"}（${judge}）` : `${list.length} / ${VOTE_MAX} 位（${judge}）`)
     : `${list.length} / ${MAX_PICK} 点・キープ ${keeps.length}件（${judge}）`;
   const slot = (id, label) => {
     const e = id ? ENTRIES.find(x => x.id === id) : null;
@@ -651,7 +656,7 @@ function renderBar(){
       : `<div class="slot"><span class="n" style="color:var(--muted);text-shadow:none">${label}</span></div>`;
   };
   $("slots").innerHTML = voteMode
-    ? Array.from({length: VOTE_MAX}, (_,i) => slot(list[i] ? list[i][0] : null, (i+1) + "位")).join("")
+    ? Array.from({length: VOTE_MAX}, (_,i) => slot(list[i] ? list[i][0] : null, RV ? "選択" : (i+1) + "位")).join("")
     : Array.from({length: MAX_PICK}, (_,i) => slot(list[i] ? list[i][0] : null, String(i+1))).join("")
       + myAwards().map(a => `<span class="sep"></span>` + slot(awards[a.key], a.short)).join("");
 }
@@ -675,7 +680,7 @@ function fillModal(){
   $("mLiked").textContent = e.liked === true ? "いいね済み" : e.liked === false ? "まだ" : "未取得";
   $("mLink").href = e.url;
   $("mLink").hidden = hideName();   // 元のポストを開くと名前が分かるので、投票中は出さない
-  $("mPick").textContent = voteMode ? (p ? `${p.order}位（外す）` : "この作品に順位を付ける")
+  $("mPick").textContent = voteMode ? (RV ? (p ? "選んだ（外す）" : "この作品を選ぶ") : (p ? `${p.order}位（外す）` : "この作品に順位を付ける"))
                                     : (p ? `選択を外す（${p.order}番目）` : "この作品を選ぶ");
   $("mPick").className = p ? "big" : "big off";
   const kept = isKept(e.id);
@@ -753,6 +758,12 @@ function commentText(){
 
 function exportText(){
   if (commentMode) return commentText();
+  if (voteMode && RV) {
+    const v = Object.keys(votes);
+    return `【${judge}の再投票（最優秀賞）】\n` + (v.length
+      ? "選んだ作品　" + (e => hideName() ? anonUrl(e) : "@" + e.author + "　" + e.url)(ENTRIES.find(x => x.id === v[0]))
+      : "まだ選んでいません");
+  }
   if (voteMode) {
     const v = Object.entries(votes).sort((a,b) => a[1].order - b[1].order);
     return `【${judge}の投票】\n` + (v.length
@@ -909,13 +920,14 @@ try {
 
 // 投票モード：候補（vote_pool）がデータに入っているときだけボタンが出る
 $("voteToggle").hidden = !HAS_POOL;
+$("voteToggle").textContent = RV ? "最優秀賞の再投票" : "投票する";
 // 画面の切り替え：選考（ふだん）／投票／一言コメント。同時には入らない
 function setMode(m){
   voteMode = m === "vote";
   commentMode = m === "comment";
   const special = voteMode || commentMode;
   $("voteToggle").dataset.on = voteMode ? "1" : "0";
-  $("voteToggle").textContent = voteMode ? "選考の一覧に戻る" : "投票する";
+  $("voteToggle").textContent = voteMode ? "選考の一覧に戻る" : (RV ? "最優秀賞の再投票" : "投票する");
   $("cmtToggle").dataset.on = commentMode ? "1" : "0";
   $("cmtToggle").textContent = commentMode ? "選考の一覧に戻る" : "一言コメントを書く";
   $("btnExport").textContent = commentMode ? "一言コメントを書き出す" : voteMode ? "投票を書き出す" : "選んだ作品を書き出す";
