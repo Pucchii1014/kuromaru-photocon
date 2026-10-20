@@ -4257,7 +4257,9 @@
     "judge": "BIS"
    }
   ],
-  "vote_pool_round1": true
+  "vote_pool_round1": true,
+  "prize_key": "judge_b",
+  "prize_label": "審査員賞（BIS）"
  },
  {
   "id": "2104085011792293999",
@@ -6529,7 +6531,9 @@
     "label": "アバター別賞（しずくさん）",
     "judge": "kuromaru9"
    }
-  ]
+  ],
+  "prize_key": "av_shizuku",
+  "prize_label": "アバター別賞（しずくさん）"
  },
  {
   "id": "2105260260269387838",
@@ -6583,7 +6587,9 @@
     "label": "審査員賞（ぷっちー）",
     "judge": "ぷっちー"
    }
-  ]
+  ],
+  "prize_key": "judge_p",
+  "prize_label": "審査員賞（ぷっちー）"
  },
  {
   "id": "2105314024640626827",
@@ -6704,7 +6710,9 @@
     "judge": "kuromaru9"
    }
   ],
-  "vote_pool_round1": true
+  "vote_pool_round1": true,
+  "prize_key": "av_midaris",
+  "prize_label": "アバター別賞（ミダリス）"
  },
  {
   "id": "2105419500992750064",
@@ -8363,8 +8371,7 @@
    "kuromaru9",
    "Wind-up"
   ],
-  "vote_pool_round1": true,
-  "vote_pool": true
+  "vote_pool_round1": true
  },
  {
   "id": "2106795438255055075",
@@ -10229,7 +10236,9 @@
     "judge": "kuromaru9"
    }
   ],
-  "vote_pool_round1": true
+  "vote_pool_round1": true,
+  "prize_key": "av_melotron",
+  "prize_label": "アバター別賞（メロトロン）"
  },
  {
   "id": "2107783077972103437",
@@ -12706,7 +12715,9 @@
     "label": "アバター別賞（ばななちゃん）",
     "judge": "kuromaru9"
    }
-  ]
+  ],
+  "prize_key": "av_banana",
+  "prize_label": "アバター別賞（ばななちゃん）"
  },
  {
   "id": "2108517451420065855",
@@ -12737,7 +12748,9 @@
     "label": "Sampleアバター賞",
     "judge": "Wind-up"
    }
-  ]
+  ],
+  "prize_key": "sample",
+  "prize_label": "Sampleアバター賞"
  },
  {
   "id": "2108517714860114200",
@@ -13200,7 +13213,8 @@
    "ぷっちー"
   ],
   "vote_pool_round1": true,
-  "vote_pool": true
+  "prize_key": "grand",
+  "prize_label": "最優秀賞"
  },
  {
   "id": "2108550505173787110",
